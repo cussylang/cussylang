@@ -4,8 +4,17 @@ version = 4
 
 [[package]]
 name = "cussy"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "cussy-mobile"
+version = "0.3.0"
+dependencies = [
+ "cussy",
  "serde",
  "serde_json",
 ]

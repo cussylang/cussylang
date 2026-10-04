@@ -14,6 +14,9 @@ pub struct Options {
     pub fuel: u64,
     pub echo: bool,
     pub allow_ffi: bool,
+    /// Permit host filesystem/environment/stdin access, sleeping, and graph files.
+    /// Disable for embedded app runtimes; captured output remains available.
+    pub allow_host_io: bool,
     pub args: Vec<String>,
 }
 impl Default for Options {
@@ -22,6 +25,7 @@ impl Default for Options {
             fuel: 5_000_000,
             echo: false,
             allow_ffi: false,
+            allow_host_io: true,
             args: Vec::new(),
         }
     }
@@ -126,12 +130,24 @@ impl Runtime {
         self.options.fuel -= 1;
         Ok(())
     }
+    pub(crate) fn require_host_io(&self, operation: &str, s: &Span) -> Result<()> {
+        if self.options.allow_host_io {
+            Ok(())
+        } else {
+            Err(Diagnostic::new(
+                "CAPABILITY",
+                s,
+                format!("{operation} is disabled in this runtime"),
+            ))
+        }
+    }
     pub fn emit(&mut self, text: &str, s: &Span) -> Result<()> {
         if self.output.len() + text.len() > 8 * 1024 * 1024 {
             return Err(Diagnostic::new("LIMIT", s, "captured output exceeds 8 MiB"));
         }
         self.output.push_str(text);
         if self.options.echo {
+            self.require_host_io("standard output access", s)?;
             let mut out = std::io::stdout().lock();
             out.write_all(text.as_bytes())
                 .and_then(|_| out.flush())

@@ -9,3 +9,13 @@ __pycache__/
 *.py[cod]
 /benchmark-results.json
 /language-results.json
+
+/mobile/build/
+/mobile/android/.gradle/
+/mobile/android/**/build/
+/mobile/android/**/.cxx/
+/mobile/android/**/.externalNativeBuild/
+/mobile/android/local.properties
+/mobile/android/app/src/main/jniLibs/
+/mobile/ios/DerivedData/
+/mobile/ios/**/xcuserdata/

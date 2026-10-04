@@ -1,6 +1,6 @@
 # Architecture and engineering boundaries
 
-Cussy 0.2.0 is a Rust library plus a binary. The Rust dependencies are serde and
+Cussy 0.3.0 is a Rust library plus a binary. The Rust dependencies are serde and
 serde_json, used for versioned AST images. Standard libraries are Cussy source
 embedded with `include_str!`; their host operations are implemented in Rust.
 
@@ -37,6 +37,18 @@ flowchart LR
 | `compile.rs` | Optimization flags, compiler invocation, staged output publication |
 | `codegen_runtime.h` | Native arithmetic, strings, formatting and diagnostics |
 | `codegen_float.h` | Adapted Ryu binary64 formatting with bundled Boost license |
+
+## Mobile embedding
+
+`mobile/runtime` links the existing checker/interpreter behind the C interface
+in `mobile/include`. The SwiftUI app and Android JNI bridge pass UTF-8 source
+and receive owned JSON responses with output, exit status, and diagnostics.
+Each call constructs fresh state on a 16 MiB worker stack. The mobile loader only
+resolves embedded standard modules, and runtime host-operation checks disable
+filesystem/environment/stdin access, sleeping, FFI, and graph file output.
+Desktop defaults are unchanged. The apps import/export source through their own
+platform document pickers. SDK builds and platform tests are described in the
+[mobile guide](mobile.md).
 
 ## Type and storage model
 

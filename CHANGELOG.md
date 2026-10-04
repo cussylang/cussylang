@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 — 2026-10-03
+
+- Add iOS/iPadOS and Android apps that edit, open, save, and run `.cussy` source
+  locally with captured output and source diagnostics.
+- Add a shared Rust mobile runtime with a versioned C interface, background
+  execution, bounded fuel/source complexity, and embedded standard modules.
+- Disable host file access, plot export, filesystem imports, stdin, environment
+  access, sleep, and native FFI in mobile runs while preserving desktop defaults.
+- Build ARM64 and x86_64 Android libraries plus an iOS device/simulator
+  XCFramework. Add emulator and simulator integration tests to CI and releases.
+- Distribute a development Android APK, unsigned iOS app, and iOS runtime bundle
+  with checksums; document device signing and platform SDK requirements.
+
 ## 0.2.0 — 2026-10-03
 
 - Add `cussy compile` for standalone executables, assembly, object files, and

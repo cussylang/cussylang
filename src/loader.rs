@@ -35,8 +35,16 @@ pub struct Loader {
     done: HashSet<String>,
     active: HashSet<String>,
     types: HashSet<String>,
+    embedded_only: bool,
 }
 impl Loader {
+    /// Load in-memory source and embedded standard modules without filesystem access.
+    pub fn embedded_only() -> Self {
+        Self {
+            embedded_only: true,
+            ..Self::default()
+        }
+    }
     pub fn file(&mut self, path: &Path) -> Result<Program> {
         self.load_file(
             path,
@@ -60,6 +68,13 @@ impl Loader {
         })
     }
     fn load_file(&mut self, path: &Path, span: &Span) -> Result<()> {
+        if self.embedded_only {
+            return Err(Diagnostic::new(
+                "CAPABILITY",
+                span,
+                "filesystem imports are disabled; use embedded standard modules",
+            ));
+        }
         let path = path.canonicalize().map_err(|e| {
             Diagnostic::new(
                 "D404",
@@ -122,6 +137,13 @@ impl Loader {
                 if let Some(text) = embedded {
                     self.load(&format!("std:{module}"), text, base)?;
                 } else {
+                    if self.embedded_only {
+                        return Err(Diagnostic::new(
+                            "CAPABILITY",
+                            &t.span,
+                            "filesystem imports are disabled; use embedded standard modules",
+                        ));
+                    }
                     let mut p = PathBuf::from(module);
                     if p.extension().is_none() {
                         p.set_extension("cussy");

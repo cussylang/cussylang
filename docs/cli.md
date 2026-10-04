@@ -54,7 +54,7 @@ them. Treat sources and artifacts as executable programs, not a sandbox format.
 
 ```text
 $ cussy repl
-CUSSY REPL v0.2.0
+CUSSY REPL v0.3.0
 C + Desmos + Geometry Dash + irreversible jole exposure
 whitecaplol is our papa
 whitecaplol hop on stream

@@ -20,7 +20,7 @@ Source files use **`.cussy`**. Legacy `.csy` files remain compatible.
 
 ## Install
 
-**No Rust needed:** download the archive for your operating system from
+**Desktop, no Rust needed:** download the archive for your operating system from
 [GitHub Releases](https://github.com/cussylang/cussylang/releases/latest), extract it,
 and run `bin/cussy` (`bin/cussy.exe` on Windows). See the
 [installation and checksum instructions](docs/distribution.md).
@@ -29,7 +29,7 @@ and run `bin/cussy` (`bin/cussy.exe` on Windows). See the
 1.88 or newer, then:
 
 ```sh
-cargo install --git https://github.com/cussylang/cussylang --tag v0.2.0 --locked
+cargo install --git https://github.com/cussylang/cussylang --tag v0.3.0 --locked
 cussy --version
 ```
 
@@ -45,6 +45,24 @@ cargo run --release -- run examples/hello.cussy
 `target/release/cussy` is the standalone executable (`cussy.exe` on Windows).
 The standard library is embedded: there are no runtime packages to install.
 Unix users can also run `./cussy`, the local incremental-build launcher.
+
+## iOS and Android
+
+The mobile apps edit, open, save, and run `.cussy` programs locally, with output
+and diagnostics in the app. Android 8.0+ supports ARM64 devices and x86_64
+emulators; iPhone and iPad require iOS/iPadOS 16+.
+
+- **Android:** install the development APK from
+  [Releases](https://github.com/cussylang/cussylang/releases/latest).
+- **iOS/iPadOS:** build the included Xcode project with your Apple signing team,
+  or sign the unsigned IPA yourself. The IPA is not directly installable without
+  signing. A device/simulator XCFramework is also available for embedding.
+
+Mobile execution uses the interpreter, including arrays, records, and checked
+pointers. It has a run budget and supports embedded standard imports; host file
+I/O, plot export, native FFI, and multi-file imports are unavailable in the apps.
+These are development distributions, not App Store or Play Store listings.
+See [mobile installation, builds, and runtime API](docs/mobile.md).
 
 ## Compile to machine code
 
@@ -137,6 +155,7 @@ parametric circles, regression, and a multi-file graph/game simulation.
 - Normal, brainrot and jole diagnostics. Every personality keeps the technical
   explanation. Serious programs do not need the brainrot library.
 - A persistent REPL, comment-preserving formatter, and VS Code highlighting starter.
+- Native iOS/iPadOS and Android editors with an embedded Cussy runtime.
 
 ## Performance
 

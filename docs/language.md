@@ -1,4 +1,4 @@
-# Cussy language guide — 0.2.0
+# Cussy language guide — 0.3.0
 
 This document describes implemented behavior. Cussy is C-shaped and statically
 checked before execution, with an interpreter that checks runtime values, bounds,

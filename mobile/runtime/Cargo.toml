@@ -1,0 +1,18 @@
+[package]
+name = "cussy-mobile"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.88"
+description = "Embedded Cussy interpreter with a stable C ABI for iOS and Android"
+license = "MIT"
+repository = "https://github.com/cussylang/cussylang"
+publish = false
+
+[lib]
+name = "cussy_mobile"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[dependencies]
+cussy = { path = "../.." }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

@@ -12,11 +12,15 @@ Clang/GCC and a platform C development toolchain; see [native compilation](nativ
 | macOS Apple Silicon | `macos-arm64.tar.gz` |
 | macOS Intel | `macos-x64.tar.gz` |
 | Windows x64 | `windows-x64.zip` |
+| Android ARM64 / x86_64 development app | `android.apk` |
+| iPhone/iPad app, requires your signing | `ios-unsigned.ipa` |
+| iOS device + simulator embedding runtime | `ios-runtime.zip` |
 | Rust source, tests, examples, and documentation | `source.tar.gz` |
 | VS Code syntax extension starter | `vscode-starter.zip` |
 
 Every name begins with `cussy-<version>-`. `SHA256SUMS` contains the SHA-256 hashes
-of all release archives. On Linux, verify a downloaded archive with `sha256sum`;
+of all release downloads. See the [mobile guide](mobile.md) for phone installation
+and the required iOS signing step. On Linux, verify a downloaded file with `sha256sum`;
 on macOS, use `shasum -a 256`; on Windows PowerShell, use
 `Get-FileHash -Algorithm SHA256`. Compare its hash with the matching line in
 `SHA256SUMS`.
@@ -27,8 +31,8 @@ Extract the archive for your operating system and CPU. For example, on Apple
 Silicon macOS:
 
 ```sh
-tar -xzf cussy-0.2.0-macos-arm64.tar.gz
-cd cussy-0.2.0
+tar -xzf cussy-0.3.0-macos-arm64.tar.gz
+cd cussy-0.3.0
 ./bin/cussy --version
 ./bin/cussy run examples/hello.cussy
 ./bin/cussy run examples/graphdash/main.cussy
@@ -38,8 +42,8 @@ cd cussy-0.2.0
 On Windows, extract the ZIP using Explorer or PowerShell:
 
 ```powershell
-Expand-Archive .\cussy-0.2.0-windows-x64.zip -DestinationPath .
-Set-Location .\cussy-0.2.0
+Expand-Archive .\cussy-0.3.0-windows-x64.zip -DestinationPath .
+Set-Location .\cussy-0.3.0
 .\bin\cussy.exe run examples\hello.cussy
 .\bin\cussy.exe repl
 ```
@@ -60,14 +64,14 @@ Install Rust and Cargo at the version required by `Cargo.toml` or newer. Install
 the tagged release directly from GitHub:
 
 ```sh
-cargo install --git https://github.com/cussylang/cussylang --tag v0.2.0 --locked
+cargo install --git https://github.com/cussylang/cussylang --tag v0.3.0 --locked
 cussy --version
 ```
 
 Or clone and build it yourself:
 
 ```sh
-git clone --branch v0.2.0 https://github.com/cussylang/cussylang.git
+git clone --branch v0.3.0 https://github.com/cussylang/cussylang.git
 cd cussylang
 cargo build --release --locked
 cargo install --path . --locked
@@ -116,9 +120,10 @@ VSIX. Follow [the editor instructions](../editors/vscode/README.md) to install i
    changelog. Refresh versioned installation examples.
 2. Run the contributor checks and `python3 scripts/package.py --smoke-test`.
 3. Push the reviewed commit to `main`, confirm CI passes, then create and push a
-   matching tag, for example `git tag v0.2.0` and `git push origin v0.2.0`.
+   matching tag, for example `git tag v0.3.0` and `git push origin v0.3.0`.
 4. The release workflow builds and tests Linux x64, macOS arm64, macOS x64, and
-   Windows x64 on matching hosts. Each job tests its extracted package.
+   Windows x64 on matching hosts. Each job tests its extracted package. The mobile
+   workflow builds Android and iOS apps and runs tests in both platform simulators.
 5. Once every platform succeeds, a separate job creates the source/editor
    archives, checks the complete asset set, computes checksums, and publishes
    the GitHub release with generated notes.

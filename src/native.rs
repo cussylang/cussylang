@@ -44,6 +44,7 @@ impl Runtime {
                 Ok(Void)
             }
             "listen" => {
+                self.require_host_io("standard input access", s)?;
                 let mut text = std::string::String::new();
                 io::stdin()
                     .read_line(&mut text)
@@ -137,6 +138,7 @@ impl Runtime {
             "__atan2" => finite(num(0)?.atan2(num(1)?)),
             "__clock" => finite(self.started.elapsed().as_secs_f64()),
             "__sleep" => {
+                self.require_host_io("sleep", s)?;
                 let t = num(0)?;
                 if !(0.0..=60.0).contains(&t) {
                     return Err(err("sleep seconds must be in 0..60"));
@@ -158,18 +160,26 @@ impl Runtime {
                 Ok(Void)
             }
             "__read_file" => {
+                self.require_host_io("file reads", s)?;
                 let path = text(0)?;
                 let file = std::fs::File::open(&path)
                     .map_err(|e| Diagnostic::new("IO", s, format!("cannot read {path}: {e}")))?;
                 Ok(String(read_text(file, s)?))
             }
             "__write_file" => {
+                self.require_host_io("file writes", s)?;
                 std::fs::write(text(0)?, text(1)?)
                     .map_err(|e| Diagnostic::new("IO", s, e.to_string()))?;
                 Ok(Void)
             }
-            "__file_exists" => Ok(Bool(std::path::Path::new(&text(0)?).is_file())),
-            "__env" => Ok(String(std::env::var(text(0)?).unwrap_or_default())),
+            "__file_exists" => {
+                self.require_host_io("filesystem access", s)?;
+                Ok(Bool(std::path::Path::new(&text(0)?).is_file()))
+            }
+            "__env" => {
+                self.require_host_io("environment access", s)?;
+                Ok(String(std::env::var(text(0)?).unwrap_or_default()))
+            }
             "__arg" => {
                 let i = int(0)?;
                 if i < 0 {
@@ -282,6 +292,7 @@ impl Runtime {
                 Ok(Record("Regression".into(), fields))
             }
             "__plot_points" => {
+                self.require_host_io("plot file output", s)?;
                 let mut points = Vec::new();
                 for p in a[0].elements(s)? {
                     if let Point(x, y, _) = p {
@@ -303,6 +314,7 @@ impl Runtime {
                 Ok(Void)
             }
             "__native1" => {
+                self.require_host_io("native FFI", s)?;
                 if !self.options.allow_ffi {
                     return Err(Diagnostic::new("FFI",s,"native calls require --allow-ffi").help("only enable for a trusted library and a known double(double) C ABI symbol"));
                 }

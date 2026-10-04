@@ -1,6 +1,6 @@
 [package]
 name = "cussy"
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 rust-version = "1.88"
 description = "C, but somebody opened Desmos. A checked language with native compilation, an interpreter, and graphing."
@@ -11,7 +11,7 @@ documentation = "https://github.com/cussylang/cussylang/blob/main/docs/language.
 readme = "README.md"
 keywords = ["language", "compiler", "interpreter", "graphing", "cussy"]
 categories = ["compilers", "command-line-utilities"]
-include = ["src/**", "stdlib/**", "docs/**", "examples/**", "tests/**", "benchmarks/**", "scripts/**", "editors/**", "research/**", "Cargo.toml", "Cargo.lock", "README.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md"]
+include = ["src/**", "mobile/runtime/Cargo.toml", "mobile/runtime/src/**", "mobile/include/**", "stdlib/**", "docs/**", "examples/**", "tests/**", "benchmarks/**", "scripts/**", "editors/**", "research/**", "Cargo.toml", "Cargo.lock", "README.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
@@ -20,3 +20,8 @@ serde_json = "1"
 [profile.release]
 strip = true
 lto = "thin"
+
+[workspace]
+members = ["mobile/runtime"]
+default-members = ["."]
+resolver = "3"

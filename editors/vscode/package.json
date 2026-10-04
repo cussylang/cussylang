@@ -2,7 +2,7 @@
   "name": "cussy-language",
   "displayName": "Cussy \u2014 compile, graph, jole",
   "description": "Cussy language highlighting, snippets and local CLI tasks. Whitecaplol hop on stream.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "cussy-community",
   "license": "MIT",
   "engines": {

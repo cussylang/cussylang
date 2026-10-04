@@ -1,0 +1,8 @@
+<resources>
+    <item name="source_editor" type="id" />
+    <item name="run_button" type="id" />
+    <item name="open_button" type="id" />
+    <item name="save_button" type="id" />
+    <item name="output_text" type="id" />
+    <item name="status_text" type="id" />
+</resources>

@@ -32,8 +32,8 @@ Run these commands from the repository root on any supported platform:
 
 ```sh
 cargo fmt --all --check
-cargo clippy --locked --all-targets -- -D warnings
-cargo test --locked
+cargo clippy --locked --workspace --all-targets -- -D warnings
+cargo test --locked --workspace
 cargo build --locked --release
 ```
 
@@ -49,6 +49,9 @@ test extracts into a temporary directory and exercises the executable, imports,
 SVG output, and an artifact without its original source files.
 
 CI runs checks on Linux, macOS, and Windows, plus a separate minimum-Rust check.
+The mobile jobs build the Android APK and iOS device/simulator runtime, then run
+JNI instrumentation tests in Android Emulator and XCTest in iOS Simulator. See
+[mobile development](docs/mobile.md) for SDK requirements and local commands.
 A passing local test does not prove behavior on a platform you have not tested;
 describe the environment used in your pull request.
 
@@ -60,4 +63,4 @@ For vulnerabilities, use the [security reporting process](SECURITY.md).
 
 Maintainers follow [the distribution guide](docs/distribution.md#maintainer-release-process).
 The `v<version>` tag must match `Cargo.toml`. The release workflow tests each
-platform and publishes only after all four binary packages succeed.
+platform and publishes only after all desktop and mobile jobs succeed.

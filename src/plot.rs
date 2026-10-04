@@ -7,6 +7,7 @@ use crate::{
 use std::fmt::Write;
 impl Runtime {
     pub fn plot(&mut self, name: &str, path: &str, s: &Span) -> Result<()> {
+        self.require_host_io("plot file output", s)?;
         let (lo, hi) = self.bounds.get(name).copied().unwrap_or((-10., 10.));
         let mut points = Vec::new();
         for i in 0..=800 {

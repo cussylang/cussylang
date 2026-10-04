@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Cussy</string>
+    <string name="source">Source · .cussy</string>
+    <string name="run">Run</string>
+    <string name="open">Open .cussy</string>
+    <string name="save">Save .cussy</string>
+    <string name="output">Output</string>
+    <string name="ready">Ready</string>
+    <string name="running">Running…</string>
+    <string name="opening">Opening…</string>
+    <string name="runtime_note">Runs on your device. Filesystem access and native FFI are disabled.</string>
+</resources>

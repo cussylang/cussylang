@@ -25,9 +25,9 @@ COMMON_FILES = [
 ]
 SOURCE_FILES = COMMON_FILES + [
     "Cargo.toml", "Cargo.lock", ".gitignore", ".github", "cussy", "src", "tests",
-    "scripts",
+    "scripts", "mobile",
 ]
-EXCLUDED_PARTS = {".git", "target", "dist", "__pycache__", "node_modules", ".venv", ".DS_Store"}
+EXCLUDED_PARTS = {".git", "target", "dist", "build", ".gradle", ".cxx", ".externalNativeBuild", "jniLibs", "DerivedData", "xcuserdata", "__pycache__", "node_modules", ".venv", ".DS_Store"}
 
 
 def package_version():
@@ -52,6 +52,7 @@ def files(names):
             if (not source.is_file() or source.is_symlink()
                     or EXCLUDED_PARTS.intersection(relative.parts)
                     or source.suffix in {".pyc", ".pyo", ".csyb"}
+                    or source.name == "local.properties"
                     or source.name.endswith(("~", ".swp"))):
                 continue
             yield source
