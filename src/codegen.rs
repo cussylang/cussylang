@@ -1078,8 +1078,8 @@ impl<'a> Emitter<'a> {
             }
             "__pow" | "__min" | "__max" | "__atan2" => {
                 let function = match name {
-                    "__min" => "fmin",
-                    "__max" => "fmax",
+                    "__min" => "cx_min",
+                    "__max" => "cx_max",
                     _ => &name[2..],
                 };
                 Value::new(

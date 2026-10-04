@@ -89,6 +89,12 @@ Rust 1.96.1 `-O`, CPython 3.10.14, and Node.js 22.22.0. It includes compiler fla
 tool and program SHA-256 hashes, all samples, medians, minimums/maximums, and run
 order. The runner rejects changes to tools or source files during measurement.
 
+The measured Cussy compiler/interpreter source is pinned to
+[commit 37f407b](https://github.com/cussylang/cussylang/tree/37f407b6cf997fa64ba682862550342074c17908).
+These timings precede a later floating-point `min`/`max` signed-zero portability
+fix, which the integer workloads do not exercise. The report retains the original
+measured binary hashes; it does not claim timings for the later patched binary.
+
 Native Cussy uses `cussy compile --cc clang` with default `-O3`, checked integer
 arithmetic, `-fno-fast-math`, and `-ffp-contract=off`. It receives the exact same
 `.cussy` input as the interpreter. All Cussy-native, C, and Rust executables finish

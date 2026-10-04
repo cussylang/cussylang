@@ -315,6 +315,19 @@ fn standard_library_numeric_and_string() {
     );
 }
 #[test]
+fn min_max_signed_zeros_have_deterministic_signs() {
+    assert_eq!(
+        output(
+            "graph math;int whitecap(){\
+                jole(min(-0.0,0.0),min(0.0,-0.0),max(-0.0,0.0),max(0.0,-0.0));\
+                jole(min(-0.0,-0.0),max(-0.0,-0.0),min(0.0,0.0),max(0.0,0.0));\
+                verify 0;\
+            }"
+        ),
+        "-0 -0 0 0\n-0 -0 0 0\n"
+    );
+}
+#[test]
 fn regression_has_known_solution() {
     assert_eq!(
         output(

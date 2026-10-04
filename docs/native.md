@@ -67,7 +67,8 @@ and executables target the compiler's platform and architecture. Executables and
 objects are OS formats such as Mach-O, ELF, or PE/COFF, not freestanding firmware
 images.
 
-The driver disables fast-math and floating-point contraction. Checked integer
+The driver disables fast-math and floating-point contraction. Native and
+interpreted `min`/`max` use the same defined signed-zero tie rules. Checked integer
 operations still report overflow and division by zero; optimization does not
 permit C's undefined signed-overflow behavior. Native execution has no interpreter
 fuel counter. Infinite loops can therefore run until interrupted.

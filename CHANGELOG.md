@@ -14,6 +14,8 @@
 - Publish native and interpreter benchmark results separately, and require native
   compilation and standalone execution in platform CI and package smoke tests.
 - Stage compiler output so generation/toolchain errors preserve existing files.
+- Make floating-point `min`/`max` signed-zero ties deterministic across native
+  compilers, Rust versions, and platforms.
 
 ## 0.1.1 — 2026-10-03
 

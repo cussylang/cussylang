@@ -132,8 +132,8 @@ impl Runtime {
             "__exp" => finite(num(0)?.exp()),
             "__log" => finite(num(0)?.ln()),
             "__pow" => finite(num(0)?.powf(num(1)?)),
-            "__min" => finite(num(0)?.min(num(1)?)),
-            "__max" => finite(num(0)?.max(num(1)?)),
+            "__min" => finite(min_number(num(0)?, num(1)?)),
+            "__max" => finite(max_number(num(0)?, num(1)?)),
             "__atan2" => finite(num(0)?.atan2(num(1)?)),
             "__clock" => finite(self.started.elapsed().as_secs_f64()),
             "__sleep" => {
@@ -316,6 +316,30 @@ impl Runtime {
         }
     }
 }
+// Give signed-zero ties a language-defined result, independent of LLVM/libm.
+fn min_number(a: f64, b: f64) -> f64 {
+    if a == 0.0 && b == 0.0 {
+        if a.is_sign_negative() || b.is_sign_negative() {
+            -0.0
+        } else {
+            0.0
+        }
+    } else {
+        a.min(b)
+    }
+}
+fn max_number(a: f64, b: f64) -> f64 {
+    if a == 0.0 && b == 0.0 {
+        if a.is_sign_negative() && b.is_sign_negative() {
+            -0.0
+        } else {
+            0.0
+        }
+    } else {
+        a.max(b)
+    }
+}
+
 fn read_text(input: impl Read, s: &Span) -> Result<String> {
     const MAX_BYTES: usize = 8 * 1024 * 1024;
     let mut bytes = Vec::new();

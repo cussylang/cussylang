@@ -250,6 +250,10 @@ Built artifacts contain module ASTs and source text, so original files and a
 separate installed stdlib folder are unnecessary. `graph` statements do not fetch
 remote packages; there is no package registry or network import mechanism.
 
+The math module's `min` and `max` define signed-zero ties consistently on every
+platform: `min(-0.0, 0.0)` is `-0`, and `max(-0.0, 0.0)` is `0`, in either
+argument order. Equal-sign zero inputs retain their sign.
+
 ## 17. Desmos types
 
 `point p = (5, 10);` creates a point. `vector v = (3, 4);` accepts the same literal

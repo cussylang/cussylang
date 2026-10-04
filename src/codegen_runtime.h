@@ -97,6 +97,15 @@ static double cx_finite(double value, cx_loc location) {
     if (!isfinite(value)) cx_fail("DOMAIN", "math domain error or non-finite result", location);
     return value;
 }
+/* Match Cussy's explicit signed-zero tie rule rather than platform fmin/fmax. */
+static double cx_min(double a, double b) {
+    if (a == 0.0 && b == 0.0) return signbit(a) || signbit(b) ? -0.0 : 0.0;
+    return fmin(a, b);
+}
+static double cx_max(double a, double b) {
+    if (a == 0.0 && b == 0.0) return signbit(a) && signbit(b) ? -0.0 : 0.0;
+    return fmax(a, b);
+}
 static uint64_t cx_unsigned(int64_t value, cx_loc location) {
     if (value < 0) cx_fail("AURA_OVERFLOW", "negative operand in unsigned arithmetic", location);
     return (uint64_t)value;

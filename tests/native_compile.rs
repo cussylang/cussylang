@@ -228,14 +228,27 @@ fn signed_zero_math_and_decimal_conversion_match_interpreter() {
         graph math;
         int whitecap(){
             jole(min(-0.0,0.0),min(0.0,-0.0),max(-0.0,0.0),max(0.0,-0.0));
+            jole(min(-0.0,-0.0),max(-0.0,-0.0),min(0.0,0.0),max(0.0,0.0));
             jole(to_float("+001.e+2"),to_float("-0"),to_float(".1"));
             jole(to_float("1.e2"),to_float("1e-9999"));
             jole(to_int("-9223372036854775808"),to_int("+9223372036854775807"));
             verify 0;
         }
     "#;
+    let expected =
+        b"-0 -0 0 0\n-0 -0 0 0\n100 -0 0.1\n100 0\n-9223372036854775808 9223372036854775807\n";
     for optimization in ["-O0", "-O3"] {
-        compare_execution(&Temp::new(), source, compiler, &[optimization]);
+        let temp = Temp::new();
+        let path = temp.source(source);
+        let interpreted = driver(&["run", path.to_str().unwrap()], &temp.0);
+        assert_success(&interpreted);
+        assert_eq!(interpreted.stdout, expected, "interpreter output");
+        assert!(interpreted.stderr.is_empty(), "{interpreted:?}");
+        assert_success(&compile(&temp, &path, compiler, &[optimization]));
+        let native = Command::new(temp.executable()).output().unwrap();
+        assert_success(&native);
+        assert_eq!(native.stdout, expected, "native output with {optimization}");
+        assert!(native.stderr.is_empty(), "{native:?}");
     }
 }
 

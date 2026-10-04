@@ -18,6 +18,13 @@
     "node": "v22.22.0",
     "v8": "12.4.254.21-node.33"
   },
+  "compiler_provenance": {
+    "repository": "https://github.com/cussylang/cussylang",
+    "measured_source_commit": "37f407b6cf997fa64ba682862550342074c17908",
+    "source_url": "https://github.com/cussylang/cussylang/tree/37f407b6cf997fa64ba682862550342074c17908",
+    "scope": "Cussy compiler/interpreter source used to build the measured executables, recorded at this commit.",
+    "subsequent_fix": "A later floating-point min/max signed-zero portability fix is not included in these timings. These integer workloads do not exercise min/max or signed-zero handling. This report retains the original measured binary hashes and makes no timing claim for the later patched binary."
+  },
   "tool_executable_sha256": {
     "cussy": "c382e9afdbafbc785afafe4e6bd1ccfe5715cc8e6f137147873ffbed208c47c6",
     "python": "d521d7087d42371b6f991faad1c17c72528519fe8f8831dc333d085bfc5545f9",
