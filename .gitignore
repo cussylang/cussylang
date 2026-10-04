@@ -8,3 +8,4 @@
 __pycache__/
 *.py[cod]
 /benchmark-results.json
+/language-results.json

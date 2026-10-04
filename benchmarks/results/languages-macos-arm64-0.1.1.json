@@ -1,0 +1,578 @@
+{
+  "measured_at_utc": "2026-10-04T02:27:42.845390+00:00",
+  "local_date": "2026-10-03",
+  "local_timezone": "America/Chicago",
+  "environment": {
+    "os": "Darwin",
+    "os_version": "25.6.0",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "architecture": "arm64",
+    "cpu": "Apple M1 Max",
+    "logical_cpus": 10
+  },
+  "versions": {
+    "cussy": "cussy 0.1.1",
+    "clang": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix",
+    "rustc": "rustc 1.96.1 (31fca3adb 2026-06-26) (Homebrew)\nbinary: rustc\ncommit-hash: 31fca3adb283cc9dfd56b49cdee9a96eb9c96ffd\ncommit-date: 2026-06-26\nhost: aarch64-apple-darwin\nrelease: 1.96.1\nLLVM version: 22.1.8",
+    "python": "CPython 3.10.14 (main, Jan 24 2026, 12:13:26) [Clang 17.0.0 (clang-1700.0.13.5)]",
+    "node": "v22.22.0",
+    "v8": "12.4.254.21-node.33"
+  },
+  "tool_executable_sha256": {
+    "cussy": "91bdb6d0fee4806f8c5ae574848ac56336f9b7f4cbdb64884e72d045ffc4c05d",
+    "python": "d521d7087d42371b6f991faad1c17c72528519fe8f8831dc333d085bfc5545f9",
+    "clang": "b8763cf250e607a778bb4603cecb5b90338814d0a3dfcba0d57b1de242f610e9",
+    "rustc": "76e1a89c22e63fafd1e10063dc4c6cea1f51f6f8093b4a8f3cf0931c6d840471",
+    "node": "913b144fdb40638b1acef7974ab3c33fbd527cc0974cb5da467ab1e6ac51b4d4"
+  },
+  "methodology": {
+    "measurement": "fresh-process CLI wall time, including startup and shutdown",
+    "interpreted_inputs": "source parsing/checking and execution included",
+    "native_compilation": "completed before all warmups and timed runs; excluded",
+    "cussy_build": "cargo build --release (thin LTO, stripped)",
+    "cussy_fuel": 50000000,
+    "c_flags": [
+      "-O3",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-pedantic"
+    ],
+    "rust_flags": [
+      "-O",
+      "--edition=2024"
+    ],
+    "runs_per_case_language": 7,
+    "warmup_processes_per_case_language": 1,
+    "warmup_scope": "fresh processes: warm filesystem/OS caches, no persistent JIT state",
+    "order": "rotate language order by case index plus sample index",
+    "inputs": "same fixed constants and algorithms in all five languages",
+    "arithmetic": "integer intermediates below 2^53; exact in JavaScript and i64",
+    "validation": "exit status and exact stdout checked on every process",
+    "reference_algorithms": "iterative Fibonacci, affine exponentiation, prime sieve",
+    "optimization": "native compilers may inline, fold constants, and optimize freely",
+    "limitations": "short workloads include substantial startup overhead; not steady-state throughput or a general language ranking"
+  },
+  "cases": {
+    "fibonacci": {
+      "expected_stdout": "46368\n",
+      "sources": {
+        "cussy": {
+          "path": "benchmarks/languages/fibonacci.cussy",
+          "sha256": "88ad1cf7a42e134cfe4e98ed38df75711f804fb59db45fe437852e5b1a0749e4"
+        },
+        "c": {
+          "path": "benchmarks/languages/fibonacci.c",
+          "sha256": "c22ef9c5ef22fcd02af6bd38bf9ec12da9d1de482ec1fc632557b400dc7351de"
+        },
+        "rust": {
+          "path": "benchmarks/languages/fibonacci.rs",
+          "sha256": "3ef67c503f229a3729a076d95a2fe3528a3453e89a302ed347429b0049a0f422"
+        },
+        "python": {
+          "path": "benchmarks/languages/fibonacci.py",
+          "sha256": "a046ec06fd1a52451fff97cbaea85421e175683eedda33ee2a661d88d1f4798e"
+        },
+        "javascript": {
+          "path": "benchmarks/languages/fibonacci.js",
+          "sha256": "ba30581b60400fc5a02c5a0840a0f60a7285f635fb66318f8105d9b8f3f71669"
+        }
+      },
+      "native_compile_commands": {
+        "c": [
+          "clang",
+          "-O3",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "benchmarks/languages/fibonacci.c",
+          "-o",
+          "<build>/fibonacci-c"
+        ],
+        "rust": [
+          "rustc",
+          "-O",
+          "--edition=2024",
+          "benchmarks/languages/fibonacci.rs",
+          "-o",
+          "<build>/fibonacci-rust"
+        ]
+      },
+      "native_executable_sha256": {
+        "c": "8b1bbcd97b46835cb5777e118527498266c5f38c6e4a7a533da3dc1d2794e0f0",
+        "rust": "432e5370c7b8cdaf4c2347aec4ab9973ece59abbfbaca7ef65500b9565775054"
+      },
+      "measurements": {
+        "cussy": {
+          "median_seconds": 0.08986620799987577,
+          "minimum_seconds": 0.08480066699848976,
+          "maximum_seconds": 0.1099925830058055,
+          "samples_seconds": [
+            0.098149708006531,
+            0.08480066699848976,
+            0.08986620799987577,
+            0.10775366700545419,
+            0.08643054199637845,
+            0.1099925830058055,
+            0.08747308299643919
+          ]
+        },
+        "c": {
+          "median_seconds": 0.005567541011259891,
+          "minimum_seconds": 0.004101500002434477,
+          "maximum_seconds": 0.009930250002071261,
+          "samples_seconds": [
+            0.006081542000174522,
+            0.009930250002071261,
+            0.0044217079994268715,
+            0.005567541011259891,
+            0.004101500002434477,
+            0.005729833996156231,
+            0.00493879200075753
+          ]
+        },
+        "rust": {
+          "median_seconds": 0.00601862499024719,
+          "minimum_seconds": 0.005367790989112109,
+          "maximum_seconds": 0.01714450000145007,
+          "samples_seconds": [
+            0.005642499992973171,
+            0.01714450000145007,
+            0.009815041004912928,
+            0.005367790989112109,
+            0.005730541000957601,
+            0.011134500004118308,
+            0.00601862499024719
+          ]
+        },
+        "python": {
+          "median_seconds": 0.045862625003792346,
+          "minimum_seconds": 0.04048704200249631,
+          "maximum_seconds": 0.08810333300789353,
+          "samples_seconds": [
+            0.047767791998921894,
+            0.08810333300789353,
+            0.04157966600905638,
+            0.04073549999156967,
+            0.04048704200249631,
+            0.06433241699414793,
+            0.045862625003792346
+          ]
+        },
+        "javascript": {
+          "median_seconds": 0.04264354199403897,
+          "minimum_seconds": 0.03624870799831115,
+          "maximum_seconds": 0.1452513750118669,
+          "samples_seconds": [
+            0.1452513750118669,
+            0.03624870799831115,
+            0.04950058400572743,
+            0.04264354199403897,
+            0.03991512500215322,
+            0.04443133401218802,
+            0.039681999987806194
+          ]
+        }
+      },
+      "timed_orders": [
+        [
+          "cussy",
+          "c",
+          "rust",
+          "python",
+          "javascript"
+        ],
+        [
+          "c",
+          "rust",
+          "python",
+          "javascript",
+          "cussy"
+        ],
+        [
+          "rust",
+          "python",
+          "javascript",
+          "cussy",
+          "c"
+        ],
+        [
+          "python",
+          "javascript",
+          "cussy",
+          "c",
+          "rust"
+        ],
+        [
+          "javascript",
+          "cussy",
+          "c",
+          "rust",
+          "python"
+        ],
+        [
+          "cussy",
+          "c",
+          "rust",
+          "python",
+          "javascript"
+        ],
+        [
+          "c",
+          "rust",
+          "python",
+          "javascript",
+          "cussy"
+        ]
+      ]
+    },
+    "integer_recurrence": {
+      "expected_stdout": "588316310\n",
+      "sources": {
+        "cussy": {
+          "path": "benchmarks/languages/integer_recurrence.cussy",
+          "sha256": "a73ca80787b0351637c8ea737dbb07cbd24985f613611737dffef3db7cbd2fe7"
+        },
+        "c": {
+          "path": "benchmarks/languages/integer_recurrence.c",
+          "sha256": "690d28f64fba24464f902449a55aa7c487dbc4a7d3249fb1e0b8b5cd32ee0bab"
+        },
+        "rust": {
+          "path": "benchmarks/languages/integer_recurrence.rs",
+          "sha256": "d8fc0c522532fc6d6e17bc14d79dbac6bf4468b3e02ef6f0f9caa194ddb7cea9"
+        },
+        "python": {
+          "path": "benchmarks/languages/integer_recurrence.py",
+          "sha256": "01c44500ad305655300958a1e61c70c13087a65a871a9cbd56e0b660d7942883"
+        },
+        "javascript": {
+          "path": "benchmarks/languages/integer_recurrence.js",
+          "sha256": "6b903cec05bb9e8ed41aa88900e3dc5979560f646713e5e87c8f6762e72fdc67"
+        }
+      },
+      "native_compile_commands": {
+        "c": [
+          "clang",
+          "-O3",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "benchmarks/languages/integer_recurrence.c",
+          "-o",
+          "<build>/integer_recurrence-c"
+        ],
+        "rust": [
+          "rustc",
+          "-O",
+          "--edition=2024",
+          "benchmarks/languages/integer_recurrence.rs",
+          "-o",
+          "<build>/integer_recurrence-rust"
+        ]
+      },
+      "native_executable_sha256": {
+        "c": "e761cb8680aec4160412813480df2bf6683551f32ea2f7e639a2533d24d8ceac",
+        "rust": "3baffcf532b878b6cc7bb3133468469f2205125ffd4531a4c0ac55188cf85e9c"
+      },
+      "measurements": {
+        "cussy": {
+          "median_seconds": 0.11511050000262912,
+          "minimum_seconds": 0.09025762500823475,
+          "maximum_seconds": 0.13277308299439028,
+          "samples_seconds": [
+            0.13005920800787862,
+            0.13277308299439028,
+            0.11511050000262912,
+            0.12572633300442249,
+            0.09025762500823475,
+            0.0984496669989312,
+            0.09071370899619069
+          ]
+        },
+        "c": {
+          "median_seconds": 0.009067457998753525,
+          "minimum_seconds": 0.005693917002645321,
+          "maximum_seconds": 0.0180495419917861,
+          "samples_seconds": [
+            0.0180495419917861,
+            0.009067457998753525,
+            0.010990540991770104,
+            0.011721041999408044,
+            0.005693917002645321,
+            0.0073667499964358285,
+            0.007768249997752719
+          ]
+        },
+        "rust": {
+          "median_seconds": 0.011291583010461181,
+          "minimum_seconds": 0.005676957996911369,
+          "maximum_seconds": 0.0274835830059601,
+          "samples_seconds": [
+            0.011291583010461181,
+            0.015332457987824455,
+            0.01296362500579562,
+            0.0274835830059601,
+            0.005676957996911369,
+            0.008275415995740332,
+            0.006409624998923391
+          ]
+        },
+        "python": {
+          "median_seconds": 0.07041358400601894,
+          "minimum_seconds": 0.058725124996271916,
+          "maximum_seconds": 0.13506170798791572,
+          "samples_seconds": [
+            0.058725124996271916,
+            0.13506170798791572,
+            0.061112499999580905,
+            0.08127008299925365,
+            0.08169316699786577,
+            0.07041358400601894,
+            0.06846374999440741
+          ]
+        },
+        "javascript": {
+          "median_seconds": 0.07497687499562744,
+          "minimum_seconds": 0.05053966700506862,
+          "maximum_seconds": 0.10259495800710283,
+          "samples_seconds": [
+            0.054855333000887185,
+            0.07497687499562744,
+            0.05402566600241698,
+            0.05053966700506862,
+            0.10259495800710283,
+            0.07696645800024271,
+            0.09400891700352076
+          ]
+        }
+      },
+      "timed_orders": [
+        [
+          "c",
+          "rust",
+          "python",
+          "javascript",
+          "cussy"
+        ],
+        [
+          "rust",
+          "python",
+          "javascript",
+          "cussy",
+          "c"
+        ],
+        [
+          "python",
+          "javascript",
+          "cussy",
+          "c",
+          "rust"
+        ],
+        [
+          "javascript",
+          "cussy",
+          "c",
+          "rust",
+          "python"
+        ],
+        [
+          "cussy",
+          "c",
+          "rust",
+          "python",
+          "javascript"
+        ],
+        [
+          "c",
+          "rust",
+          "python",
+          "javascript",
+          "cussy"
+        ],
+        [
+          "rust",
+          "python",
+          "javascript",
+          "cussy",
+          "c"
+        ]
+      ]
+    },
+    "primes": {
+      "expected_stdout": "430\n",
+      "sources": {
+        "cussy": {
+          "path": "benchmarks/languages/primes.cussy",
+          "sha256": "e458741a40777c633c9817f7c20f9da977697a26e3faec9620eb484eac8b4ce0"
+        },
+        "c": {
+          "path": "benchmarks/languages/primes.c",
+          "sha256": "ad0cd91ad06220093ce55ec57f097c0ee60129b0737ca394c3b9bbd1b2264e9e"
+        },
+        "rust": {
+          "path": "benchmarks/languages/primes.rs",
+          "sha256": "877b89c9bfc8dcc4c6b37071dc427ded76873c423d907eca3610a2ae19754a13"
+        },
+        "python": {
+          "path": "benchmarks/languages/primes.py",
+          "sha256": "2080af9c05037e45926f77386f16c6bffcf58bd517f368961cbdc7746a2e51a1"
+        },
+        "javascript": {
+          "path": "benchmarks/languages/primes.js",
+          "sha256": "955e195c6c5905cadd6c6846815e89cc311b0694d0551c3608accdd959ce9607"
+        }
+      },
+      "native_compile_commands": {
+        "c": [
+          "clang",
+          "-O3",
+          "-std=c11",
+          "-Wall",
+          "-Wextra",
+          "-pedantic",
+          "benchmarks/languages/primes.c",
+          "-o",
+          "<build>/primes-c"
+        ],
+        "rust": [
+          "rustc",
+          "-O",
+          "--edition=2024",
+          "benchmarks/languages/primes.rs",
+          "-o",
+          "<build>/primes-rust"
+        ]
+      },
+      "native_executable_sha256": {
+        "c": "11c403840ccd1bbe68c484096d0e9f2b83d3372df87a55c303306a3ffb4e9223",
+        "rust": "b1eddb4abc6c78adce8a99db619228bbbaa25b1b4d3a2f46b1f63eafc82ca0b0"
+      },
+      "measurements": {
+        "cussy": {
+          "median_seconds": 0.021380749996751547,
+          "minimum_seconds": 0.01697420800337568,
+          "maximum_seconds": 0.028460874993470497,
+          "samples_seconds": [
+            0.018900833005318418,
+            0.022492042000521906,
+            0.02232012500462588,
+            0.01697420800337568,
+            0.018582874996354803,
+            0.021380749996751547,
+            0.028460874993470497
+          ]
+        },
+        "c": {
+          "median_seconds": 0.0073200409970013425,
+          "minimum_seconds": 0.004298250001738779,
+          "maximum_seconds": 0.024034750007558614,
+          "samples_seconds": [
+            0.004298250001738779,
+            0.0073200409970013425,
+            0.004646875007892959,
+            0.0055773750063963234,
+            0.024034750007558614,
+            0.011622249992797151,
+            0.010885291994782165
+          ]
+        },
+        "rust": {
+          "median_seconds": 0.007073832995956764,
+          "minimum_seconds": 0.004478500006371178,
+          "maximum_seconds": 0.019927707995520905,
+          "samples_seconds": [
+            0.008687374996952713,
+            0.007306457991944626,
+            0.007073832995956764,
+            0.006932083997526206,
+            0.019927707995520905,
+            0.004478500006371178,
+            0.0049054160044761375
+          ]
+        },
+        "python": {
+          "median_seconds": 0.03457104200788308,
+          "minimum_seconds": 0.02901579199533444,
+          "maximum_seconds": 0.048286833000020124,
+          "samples_seconds": [
+            0.03457104200788308,
+            0.048286833000020124,
+            0.032368916989071295,
+            0.03309354199154768,
+            0.0370702079962939,
+            0.02901579199533444,
+            0.04170470900135115
+          ]
+        },
+        "javascript": {
+          "median_seconds": 0.04296358300780412,
+          "minimum_seconds": 0.03609316700021736,
+          "maximum_seconds": 0.13952079199953005,
+          "samples_seconds": [
+            0.03609316700021736,
+            0.13952079199953005,
+            0.038584665991947986,
+            0.049611750000622123,
+            0.04296358300780412,
+            0.04063420800957829,
+            0.06504145798680838
+          ]
+        }
+      },
+      "timed_orders": [
+        [
+          "rust",
+          "python",
+          "javascript",
+          "cussy",
+          "c"
+        ],
+        [
+          "python",
+          "javascript",
+          "cussy",
+          "c",
+          "rust"
+        ],
+        [
+          "javascript",
+          "cussy",
+          "c",
+          "rust",
+          "python"
+        ],
+        [
+          "cussy",
+          "c",
+          "rust",
+          "python",
+          "javascript"
+        ],
+        [
+          "c",
+          "rust",
+          "python",
+          "javascript",
+          "cussy"
+        ],
+        [
+          "rust",
+          "python",
+          "javascript",
+          "cussy",
+          "c"
+        ],
+        [
+          "python",
+          "javascript",
+          "cussy",
+          "c",
+          "rust"
+        ]
+      ]
+    }
+  },
+  "finished_at_utc": "2026-10-04T02:27:50.238208+00:00"
+}

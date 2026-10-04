@@ -36,12 +36,62 @@ Seven alternating samples follow one warmup per executable/workload.
 
 | Workload | Before (median) | After (median) | Ratio |
 |---|---:|---:|---:|
-| Fibonacci(24) | 0.497680s | 0.075169s | 6.62× |
-| 100,000 function calls | 0.260133s | 0.072714s | 3.58× |
-| 200,000-iteration numeric loop | 0.087512s | 0.070743s | 1.24× |
+| Fibonacci(24) | 0.666275s | 0.088038s | 7.57× |
+| 100,000 function calls | 0.336262s | 0.093778s | 3.59× |
+| 200,000-iteration numeric loop | 0.118544s | 0.109285s | 1.08× |
 
 [Raw timing samples and SHA-256 hashes](results/macos-arm64-0.1.1.json) are included.
 The smaller numeric-loop difference is more sensitive to system load. These are
 end-to-end CLI timings for these programs on this machine, not universal speedup
 guarantees, cross-platform results, or comparisons with C. The language remains
 a checked interpreter with the same execution model.
+
+## Comparison with other languages
+
+The [README table](../README.md#performance) compares five implementations of
+three identical algorithms:
+
+- Recursive Fibonacci(24), returning `46368`.
+- 200,000 iterations of `x = (x * 1664525 + 1013904223) % 2147483647`,
+  starting at `12345`, returning `588316310`.
+- Trial-division prime counting from 2 through 3000, returning `430`.
+
+All [15 source programs](languages) are included. C and Rust use 64-bit integers;
+every arithmetic intermediate fits below 2^53, so JavaScript's numbers represent
+the integers exactly. The runner calculates expected answers independently using
+iterative Fibonacci, affine-transform exponentiation, and a prime sieve. Every
+warmup and timed run must return the exact answer with a successful exit status.
+
+Install Clang, Rust, Node.js, and Python 3.9 or newer, then run:
+
+```sh
+cargo build --release --locked
+python3 scripts/compare_languages.py --json language-results.json
+```
+
+Use `python` on Windows if needed. All five implementations are required; missing
+tools fail explicitly. `--cussy PATH`, `--runs N`, and `--warmup N` allow another
+Cussy executable or sample count. The checked-in report uses seven samples after
+one warmup for each program. Python is invoked directly without a version-manager
+shim. Native programs compile into a temporary directory, which is removed after
+measurement; all compilation finishes before warmups and timing begin.
+
+Each sample starts a fresh process. Language order rotates between samples and
+workloads. Wall time includes startup, parsing/checking for source interpreters,
+execution, output, and shutdown. A separate warmup can warm filesystem and OS
+caches but does not preserve a JavaScript JIT between processes. The runner allows
+native inlining and constant folding; it adds no artificial `volatile` operations
+or `noinline` restrictions. Native build time is excluded.
+
+The [October 3, 2026 report](results/languages-macos-arm64-0.1.1.json) records
+Apple M1 Max/macOS 26.6.2 arm64, Cussy 0.1.1 release, Apple Clang 17.0.0 `-O3`,
+Rust 1.96.1 `-O`, CPython 3.10.14, and Node.js 22.22.0. It includes compiler flags,
+tool and program SHA-256 hashes, all samples, medians, minimums/maximums, and run
+order. The runner rejects changes to tools or source files during measurement.
+
+The short prime workload illustrates startup costs: Cussy's command finished
+before Python and Node here, while both finished before Cussy on the two longer
+workloads. Native C and Rust were faster across all three. These measurements do
+not isolate execution throughput or assess memory usage, long-running JIT code,
+I/O-heavy applications, or other machines. They should not be used as a universal
+language-speed claim.

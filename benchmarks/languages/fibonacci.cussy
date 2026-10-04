@@ -1,0 +1,9 @@
+int fib(int n) {
+    check (n < 2) { verify n; }
+    verify fib(n - 1) + fib(n - 2);
+}
+
+int whitecap() {
+    jole(fib(24));
+    verify 0;
+}

@@ -1,0 +1,8 @@
+int whitecap() {
+    int x = 12345;
+    attempt (int i = 0; i < 200000; i++) {
+        x = (x * 1664525 + 1013904223) % 2147483647;
+    }
+    jole(x);
+    verify 0;
+}

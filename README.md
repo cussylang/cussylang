@@ -114,6 +114,33 @@ parametric circles, regression, and a multi-file graph/game simulation.
   explanation. Serious programs do not need the brainrot library.
 - A persistent REPL, comment-preserving formatter, and VS Code highlighting starter.
 
+## Performance
+
+Fresh-process CLI timings on an **Apple M1 Max, macOS 26.6.2 arm64**, measured
+October 3, 2026. Values are median **milliseconds** from seven runs after one
+warmup per program; **lower is faster**. Every run produced the same verified
+answer for its workload.
+
+| Language / implementation | Fibonacci(24) | Integer recurrence, 200k iterations | Count primes ≤3000 |
+|---|---:|---:|---:|
+| **Cussy 0.1.1**, release build | **89.87** | **115.11** | **21.38** |
+| C, Apple Clang 17.0.0 `-O3` | 5.57 | 9.07 | 7.32 |
+| Rust 1.96.1 `-O` | 6.02 | 11.29 | 7.07 |
+| Python, CPython 3.10.14 | 45.86 | 70.41 | 34.57 |
+| JavaScript, Node.js 22.22.0 | 42.64 | 74.98 | 42.96 |
+
+These measurements include process startup, source parsing where applicable,
+execution, and shutdown. Native compilation happens before timing, with compiler
+optimizations enabled. Short commands are sensitive to startup costs; the prime
+result does not establish faster interpreter throughput than Python or JavaScript.
+C and Rust completed all three workloads faster than Cussy on this machine.
+
+[Equivalent source programs](benchmarks/languages),
+[raw samples and environment metadata](benchmarks/results/languages-macos-arm64-0.1.1.json),
+and [methodology and reproduction commands](benchmarks/README.md#comparison-with-other-languages)
+are included. These results describe these programs and this machine, not a
+general ranking of languages.
+
 Cussy keeps its checked interpreter semantics. Function bodies are shared and call
 frames reuse global storage, reducing call overhead. The
 [benchmark suite](benchmarks/README.md) contains reproducible workloads and measured
