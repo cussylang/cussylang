@@ -20,6 +20,10 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
+      - uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4
+        with:
+          packages: platform-tools
+          log-accepted-android-sdk-licenses: false
       - name: Install Rust and Android SDK components
         run: |
           rustup toolchain install 1.88.0 --profile minimal
@@ -109,6 +113,9 @@ jobs:
           xcodebuild -project mobile/ios/Cussy.xcodeproj -scheme Cussy -destination "platform=iOS Simulator,id=$CUSSY_SIMULATOR" -derivedDataPath mobile/build/ios-tests -resultBundlePath mobile/build/ios-tests.xcresult CODE_SIGNING_ALLOWED=NO test
       - name: Capture iOS app
         run: |
+          xcrun simctl boot "$CUSSY_SIMULATOR" || true
+          xcrun simctl bootstatus "$CUSSY_SIMULATOR" -b
+          xcrun simctl install "$CUSSY_SIMULATOR" mobile/build/ios-tests/Build/Products/Debug-iphonesimulator/Cussy.app
           xcrun simctl launch --terminate-running-process "$CUSSY_SIMULATOR" org.cussylang.Cussy
           sleep 2
           xcrun simctl io "$CUSSY_SIMULATOR" screenshot mobile/build/ios.png
