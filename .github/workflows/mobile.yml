@@ -68,6 +68,7 @@ jobs:
         run: ./gradlew --no-daemon connectedDebugAndroidTest
       - name: Capture Android app
         run: |
+          adb install -r mobile/android/app/build/outputs/apk/debug/app-debug.apk
           adb shell am start -n org.cussylang.android/.MainActivity
           sleep 2
           adb exec-out screencap -p > mobile/build/android.png
