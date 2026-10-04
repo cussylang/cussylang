@@ -42,7 +42,7 @@ jobs:
           sudo chmod 666 /dev/kvm
           mkdir -p "$ANDROID_USER_HOME" "$ANDROID_AVD_HOME"
           echo no | avdmanager create avd --name cussy --package 'system-images;android-35;google_apis;x86_64' --path "$ANDROID_AVD_HOME/cussy.avd" --force
-          "$ANDROID_HOME/emulator/emulator" -list-avds | rg --line-regexp cussy
+          "$ANDROID_HOME/emulator/emulator" -list-avds | grep -Fx cussy
           nohup "$ANDROID_HOME/emulator/emulator" -avd cussy -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -no-metrics > "$RUNNER_TEMP/cussy-emulator.log" 2>&1 &
           cussy_emulator_pid=$!
           sleep 2
