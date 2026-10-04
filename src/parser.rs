@@ -310,8 +310,7 @@ impl Parser {
     }
     fn stmt_inner(&mut self) -> Result<Stmt> {
         let span = self.span();
-        let kind;
-        if self.eat("{") {
+        let kind = if self.eat("{") {
             let mut ss = Vec::new();
             while !self.eat("}") {
                 if self.token().kind == Kind::Eof {
@@ -319,9 +318,9 @@ impl Parser {
                 }
                 ss.push(self.stmt()?);
             }
-            kind = StmtKind::Block(ss);
+            StmtKind::Block(ss)
         } else if self.eat(";") {
-            kind = StmtKind::Empty;
+            StmtKind::Empty
         } else if self.eat("check") || self.eat("if") {
             self.need("(")?;
             let e = self.expr(0)?;
@@ -332,12 +331,12 @@ impl Parser {
             } else {
                 None
             };
-            kind = StmtKind::If(e, t, f);
+            StmtKind::If(e, t, f)
         } else if self.eat("ticker") || self.eat("while") {
             self.need("(")?;
             let e = self.expr(0)?;
             self.need(")")?;
-            kind = StmtKind::While(e, Box::new(self.stmt()?));
+            StmtKind::While(e, Box::new(self.stmt()?))
         } else if self.eat("attempt") || self.eat("for") {
             self.need("(")?;
             let init = if self.eat(";") {
@@ -359,24 +358,24 @@ impl Parser {
                 self.need(")")?;
                 Some(e)
             };
-            kind = StmtKind::For(init, cond, step, Box::new(self.stmt()?));
+            StmtKind::For(init, cond, step, Box::new(self.stmt()?))
         } else if self.eat("verify") || self.eat("return") {
-            kind = StmtKind::Return(if self.eat(";") {
+            StmtKind::Return(if self.eat(";") {
                 None
             } else {
                 let e = self.expr(0)?;
                 self.need(";")?;
                 Some(e)
-            });
+            })
         } else if self.eat("crash") || self.eat("break") {
             self.need(";")?;
-            kind = StmtKind::Break;
+            StmtKind::Break
         } else if self.eat("noclip") || self.eat("continue") {
             self.need(";")?;
-            kind = StmtKind::Continue;
+            StmtKind::Continue
         } else if self.is("stream") && self.peek(1, "{") {
             self.pos += 1;
-            kind = StmtKind::Stream(Box::new(self.stmt()?));
+            StmtKind::Stream(Box::new(self.stmt()?))
         } else if self.is("domain") || self.is("range") {
             let range = self.eat("range");
             if !range {
@@ -389,7 +388,7 @@ impl Parser {
             let b = self.expr(0)?;
             self.need("]")?;
             self.need(";")?;
-            kind = StmtKind::Bounds(n, a, b, range);
+            StmtKind::Bounds(n, a, b, range)
         } else if self.eat("plot") {
             let name = self.ident()?;
             let path = if self.eat("to") {
@@ -398,7 +397,7 @@ impl Parser {
                 None
             };
             self.need(";")?;
-            kind = StmtKind::Plot(name, path);
+            StmtKind::Plot(name, path)
         } else if self.eat("trigger") || self.eat("switch") {
             self.need("(")?;
             let e = self.expr(0)?;
@@ -424,7 +423,7 @@ impl Parser {
                 }
                 arms.push((label, body));
             }
-            kind = StmtKind::Switch(e, arms);
+            StmtKind::Switch(e, arms)
         } else if self.is("locked") || self.is("const") || (self.is_type() && !self.peek(1, "(")) {
             let locked = self.eat("locked") || self.eat("const");
             let t = self.ty()?;
@@ -433,8 +432,8 @@ impl Parser {
         } else {
             let e = self.expr(0)?;
             self.need(";")?;
-            kind = StmtKind::Expr(e);
-        }
+            StmtKind::Expr(e)
+        };
         Ok(Stmt { kind, span })
     }
     fn expr(&mut self, min: u8) -> Result<Expr> {
