@@ -70,6 +70,9 @@ with normal filesystem/environment capabilities, not a security boundary.
 
 - 5,000,000 AST execution steps by default (`--fuel` changes this), call depth 128,
   syntactic nesting 256, module nesting about 64.
+- The CLI executes on one worker thread with a 16 MiB stack so recursive programs
+  can reach the checked call-depth limit even on systems with small default
+  stacks. Library embedders must provide sufficient stack space themselves.
 - Each declared array allocation is capped at 1,000,000 elements. These caps are
   practical guardrails, not a complete memory quota or denial-of-service sandbox.
 - Captured output and individual checked string/file operations use an 8 MiB

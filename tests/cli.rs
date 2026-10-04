@@ -166,6 +166,20 @@ fn command_exit_status_and_args() {
     assert_eq!(o.stdout, b"1 jole\n");
 }
 #[test]
+fn recursion_limit_is_reported_without_stack_overflow() {
+    let t = Temp::new();
+    std::fs::write(
+        t.0.join("recurse.cussy"),
+        "int recurse(){verify recurse();}int whitecap(){verify recurse();}",
+    )
+    .unwrap();
+    let out = cli(&["run", "recurse.cussy"], &t.0);
+    assert_eq!(out.status.code(), Some(1));
+    let error = String::from_utf8_lossy(&out.stderr);
+    assert!(error.starts_with("error[LIMIT]"), "{error}");
+    assert!(error.contains("call depth exceeds 128"), "{error}");
+}
+#[test]
 fn fmt_check_does_not_write() {
     let t = Temp::new();
     let s = "int whitecap(){verify 0;}";

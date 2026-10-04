@@ -25,7 +25,23 @@ fn help() {
     );
 }
 fn main() {
-    std::process::exit(cli());
+    // Keep the interpreter's documented nesting limits independent of the
+    // platform's default main-thread stack (only 1 MiB on Windows).
+    let worker = std::thread::Builder::new()
+        .name("cussy-cli".into())
+        .stack_size(16 * 1024 * 1024)
+        .spawn(cli);
+    let status = match worker {
+        Ok(worker) => match worker.join() {
+            Ok(status) => status,
+            Err(panic) => std::panic::resume_unwind(panic),
+        },
+        Err(error) => {
+            eprintln!("error: could not start Cussy: {error}");
+            1
+        }
+    };
+    std::process::exit(status);
 }
 fn cli() -> i32 {
     let args: Vec<String> = std::env::args().skip(1).collect();
