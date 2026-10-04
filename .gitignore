@@ -4,11 +4,14 @@
 *.svg
 !docs/logo.svg
 !editors/**/icon.svg
+!assets/brand/**/*.svg
+!assets/brand/*.svg
 .DS_Store
 __pycache__/
 *.py[cod]
 /benchmark-results.json
 /language-results.json
+/.venv-brand/
 
 /mobile/build/
 /mobile/android/.gradle/

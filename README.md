@@ -1,22 +1,47 @@
-# Cussy
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/cussy-wordmark-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/brand/cussy-wordmark-light.svg">
+  <img alt="Cussy" src="assets/brand/cussy-wordmark-light.svg" width="420">
+</picture>
 
-**C, but somebody opened Desmos.**
+**C-inspired code. Graphs built in.**
 
 [![CI](https://github.com/cussylang/cussylang/actions/workflows/ci.yml/badge.svg)](https://github.com/cussylang/cussylang/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/cussylang/cussylang)](https://github.com/cussylang/cussylang/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Cussy is a statically checked, C-inspired language with a native compiler and
-an interpreter, written in Rust.
-Curly braces, semicolons, functions, arrays, structures, checked pointers—and
-actual graph rendering. Its own lexer, parser, type checker, runtime, module
-loader, standard library, REPL, formatter, and deliberately excessive jole lore.
+Cussy is a statically checked, C-inspired programming language with native
+compilation, an interpreter, and built-in graphing. Write familiar functions and
+loops, work with arrays and checked pointers, or turn mathematical expressions
+into SVG plots.
+
+The toolchain is written in Rust and includes a standard library, REPL, formatter,
+and readable diagnostics. A few playful keywords give it a personality of its own.
 
 Source files use **`.cussy`**. Legacy `.csy` files remain compatible.
 
-**whitecaplol hop on stream.**
+[Quick start](#quick-start) · [Install](#install) · [Native compilation](#compile-to-machine-code) ·
+[Mobile apps](#ios-and-android) · [Documentation](#documentation) · [Examples](examples/README.md)
 
-**whitecaplol is our papa.**
+[Logo and brand assets](assets/brand/README.md) · [Download the logo kit](assets/brand/cussy-brand-kit.zip)
+
+## Quick start
+
+After [installing Cussy](#install), save this as `hello.cussy`:
+
+```cussy
+int whitecap() {
+    jole("Hello, Cussy!");
+    verify 0;
+}
+```
+
+```sh
+cussy run hello.cussy
+```
+
+`whitecap` is the entry point, `jole` prints a line, and `verify` returns a value.
+See the [language guide](docs/language.md) for types, functions, and control flow.
 
 ## Install
 
@@ -87,28 +112,9 @@ still use `cussy run`; unsupported native constructs produce a clear compile err
 See the [native compilation guide](docs/native.md) for toolchains, supported
 operations, checks, and optimization flags.
 
-## Start joling
-
-Save this as `hello.cussy`:
-
-```cussy
-graph stream;
-graph papa;
-
-int whitecap() {
-    jole("Cussy booting...");
-    stream {
-        attempt (int i = 0; i < 3; i++) {
-            yap("Attempt %d | stream %b\n", i, streamstatus());
-        }
-    }
-    papa();
-    verify 0;
-}
-```
+## Everyday commands
 
 ```sh
-cussy run hello.cussy
 cussy check hello.cussy
 cussy build hello.cussy -o hello.csyb
 cussy run hello.csyb
@@ -120,7 +126,7 @@ cussy repl
 source locations. It runs with the matching Cussy version without the original
 source files. Execution uses the same interpreter as `run`.
 
-## Compile, graph, jole
+## Draw a graph
 
 ```cussy
 graph desmos;
@@ -140,7 +146,7 @@ Open the resulting SVG in a browser. More programs are in the
 [examples index](examples/README.md), including sorting, pointers, file I/O,
 parametric circles, regression, and a multi-file graph/game simulation.
 
-## What is here
+## Language and tools
 
 - C-shaped functions, recursion, lexical scopes, integers, floats, Unicode strings
   and chars, booleans, arrays, structures, enum constants, and checked pointers.
@@ -152,8 +158,8 @@ parametric circles, regression, and a multi-file graph/game simulation.
   collisions, noclip state, frame timing, and level objects.
 - Fourteen embedded `.cussy` modules, file/environment I/O, seeded random numbers,
   and explicitly enabled Unix C FFI for `double function(double)` symbols.
-- Normal, brainrot and jole diagnostics. Every personality keeps the technical
-  explanation. Serious programs do not need the brainrot library.
+- Normal, brainrot, and jole diagnostic styles, each with the same technical
+  explanation. The themed libraries and styles are optional.
 - A persistent REPL, comment-preserving formatter, and VS Code highlighting starter.
 - Native iOS/iPadOS and Android editors with an embedded Cussy runtime.
 
@@ -193,16 +199,16 @@ results; those are workload-specific improvements, not a claim of C execution sp
 
 ## Documentation
 
-- [Language guide](docs/language.md) and [keyword table](docs/keywords.md)
-- [Standard library](docs/stdlib.md), [CLI and REPL](docs/cli.md)
-- [Architecture and limits](docs/architecture.md)
-- [Installation and distributions](docs/distribution.md)
-- [Native compilation and assembly](docs/native.md)
-- [Channel research and attribution](docs/research.md)
-- [VS Code extension starter](editors/vscode/README.md)
-- [Full lore inventory](docs/lore.txt)
+- **Learn:** [language guide](docs/language.md), [keyword table](docs/keywords.md),
+  [examples](examples/README.md)
+- **Use:** [standard library](docs/stdlib.md), [CLI and REPL](docs/cli.md),
+  [native compilation](docs/native.md)
+- **Install:** [desktop distributions](docs/distribution.md),
+  [mobile apps and embedding](docs/mobile.md), [VS Code extension](editors/vscode/README.md)
+- **Understand:** [architecture and limits](docs/architecture.md),
+  [benchmark methodology](benchmarks/README.md)
 
-Cussy 0.2 includes native compilation for its scalar core and an interpreter for
+Cussy includes native compilation for its scalar core and an interpreter for
 the full language, including checked pointers and local SVG plots. It has no raw
 pointer arithmetic, GUI graph controls, LSP, or live Geometry Dash integration.
 The explicit FFI boundary can call unsafe native
@@ -214,9 +220,9 @@ code. See the architecture guide for precise semantics and resource limits.
 [CONTRIBUTING.md](CONTRIBUTING.md). For a local development check:
 
 ```sh
-cargo fmt --check
-cargo clippy --locked --all-targets -- -D warnings
-cargo test --locked
+cargo fmt --all --check
+cargo clippy --locked --workspace --all-targets -- -D warnings
+cargo test --locked --workspace
 ```
 
 CI runs on Linux, macOS and Windows, with a separate minimum-Rust-version check.
@@ -224,9 +230,13 @@ Tagged releases test and package platform binaries, source and editor archives,
 and checksums. See [CHANGELOG.md](CHANGELOG.md), [SECURITY.md](SECURITY.md), and the
 [code of conduct](CODE_OF_CONDUCT.md).
 
-Installing Cussy may cause spontaneous graphing, excessive jole usage, and
-unexplained urges to tell whitecaplol to hop on stream.
+## Origins and license
 
-**jole means jole. Not joke.** Unofficial fan project; no creator or platform
-endorsement is implied. Original code is [MIT licensed](LICENSE); the native
+Cussy is an unofficial fan project inspired by the graphing and Geometry Dash
+communities around Whitecap and The Desmos Guy. Its vocabulary keeps a little of
+that spirit: jole means jole, and the project lore includes “whitecaplol hop on
+stream” and “whitecaplol is our papa.” See the [naming provenance](docs/research.md)
+and [lore inventory](docs/lore.txt). No creator or platform endorsement is implied.
+
+Original code is [MIT licensed](LICENSE); the native
 floating-point printer includes [Ryu under the Boost license](src/vendor/ryu/NOTICE.md).

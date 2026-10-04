@@ -1,5 +1,7 @@
 # Cussy VS Code starter
 
+<img src="images/cussy-icon.png" alt="Cussy logo" width="96">
+
 Open this directory in VS Code and press F5 to start an Extension Development
 Host. Open a `.cussy` file there (`.csy` remains supported for compatibility). This declarative extension supplies
 TextMate highlighting, comments/bracket configuration, and snippets. It has no

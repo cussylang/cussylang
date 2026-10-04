@@ -22,6 +22,7 @@ COMMON_FILES = [
     "README.md", "LICENSE", "CHANGELOG.md", "docs", "examples", "stdlib",
     "research", "benchmarks", "editors", "CONTRIBUTING.md", "SECURITY.md",
     "CODE_OF_CONDUCT.md",
+    "assets/brand",
 ]
 SOURCE_FILES = COMMON_FILES + [
     "Cargo.toml", "Cargo.lock", ".gitignore", ".github", "cussy", "src", "tests",

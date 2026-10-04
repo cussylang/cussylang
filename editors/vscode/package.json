@@ -1,7 +1,8 @@
 {
   "name": "cussy-language",
-  "displayName": "Cussy \u2014 compile, graph, jole",
-  "description": "Cussy language highlighting, snippets and local CLI tasks. Whitecaplol hop on stream.",
+  "displayName": "Cussy",
+  "description": "Syntax highlighting, snippets, and local CLI tasks for the Cussy programming language.",
+  "icon": "images/cussy-icon.png",
   "version": "0.3.0",
   "publisher": "cussy-community",
   "license": "MIT",
