@@ -1,0 +1,9 @@
+// Arithmetic and loop execution without user-function calls in the loop.
+int whitecap() {
+    int total = 0;
+    attempt (int i = 0; i < 200000; i++) {
+        total += i * 3 + 1;
+    }
+    jole(total);
+    verify 0;
+}

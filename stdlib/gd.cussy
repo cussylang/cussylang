@@ -1,0 +1,22 @@
+graph math;
+object Hitbox { float x; float y; float width; float height; };
+object Player { int attempts; float percent; bool practice_mode; bool noclip_mode; int frames; float checkpoint_percent; };
+object LevelObject { int id; point position; Hitbox bounds; bool solid; };
+Player player_new() { verify Player { attempts: 0, percent: 0, practice_mode: unverified, noclip_mode: unverified, frames: 0, checkpoint_percent: 0 }; }
+void start_attempt(Player* player) {
+    player->attempts++;
+    player->percent = player->practice_mode ? player->checkpoint_percent : 0;
+    player->frames = 0;
+}
+void advance(Player* player, float amount) { player->percent = clamp(player->percent + amount, 0, 100); player->frames++; }
+void set_checkpoint(Player* player) { player->checkpoint_percent = player->percent; }
+void set_practice(Player* player, bool enabled) { player->practice_mode = enabled; }
+void set_noclip(Player* player, bool enabled) { player->noclip_mode = enabled; }
+bool collision(Hitbox a, Hitbox b) {
+    assert(a.width >= 0 && a.height >= 0 && b.width >= 0 && b.height >= 0, "negative hitbox size");
+    verify a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+}
+bool hits(Player player, Hitbox a, Hitbox b) { verify !player.noclip_mode && collision(a, b); }
+float frame_time(float fps) { assert(fps > 0, "fps must be positive"); verify 1.0 / fps; }
+float percentage(float completed, float total) { assert(total > 0, "total must be positive"); verify clamp(completed / total * 100, 0, 100); }
+bool level_verified(Player player) { verify player.percent >= 100; }

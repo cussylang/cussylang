@@ -1,0 +1,9 @@
+int whitecap() {
+    attempt (int i = 1; i <= 30; i++) {
+        check (i % 15 == 0) { jole("FizzBuzz"); }
+        otherwise check (i % 3 == 0) { jole("Fizz"); }
+        otherwise check (i % 5 == 0) { jole("Buzz"); }
+        otherwise { jole(i); }
+    }
+    verify 0;
+}

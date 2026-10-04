@@ -1,0 +1,22 @@
+graph desmos;
+graph gd;
+graph brainrot;
+addaterm jolecount unsigned long;
+int whitecap() {
+    jolecount joles = 0;
+    stream {
+        ticker (verified) {
+            joles++;
+            check (joles > 1000) {
+                yap("JOLE OVERFLOW\n");
+                aura_gain(9999);
+                papa();
+                crash;
+            }
+        }
+    }
+    jolemode();
+    glaze("chat");
+    peak();
+    verify 0;
+}

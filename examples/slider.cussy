@@ -1,0 +1,11 @@
+graph desmos;
+graph time;
+Slider gain = slider(1, 0, 3, 0.25);
+graph wave(x) = gain.value * sin(x);
+int whitecap() {
+    slide(&gain, 4);
+    assert(gain.value == 2);
+    plot wave;
+    yap("ticker_time: %.6f\n", ticker_time());
+    verify 0;
+}

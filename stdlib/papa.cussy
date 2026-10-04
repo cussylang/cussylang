@@ -1,0 +1,4 @@
+locked string PAPA = "whitecaplol";
+void papa() { jole("whitecaplol is our papa"); }
+void ourpapa() { papa(); }
+void blessedbypapa() { jole("PAPA APPROVED"); }

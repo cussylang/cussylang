@@ -1,0 +1,3 @@
+graph gd;
+object Level { string name; int frames; float wave_height; };
+Level create_level() { verify Level { name: "iSpyWithMyJoleCompiler", frames: 120, wave_height: 2 }; }

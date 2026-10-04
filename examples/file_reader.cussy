@@ -1,0 +1,6 @@
+graph system;
+int whitecap() {
+    string path = argc() > 0 ? arg(0) : "examples/data.txt";
+    jole(read_file(path));
+    verify 0;
+}

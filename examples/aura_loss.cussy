@@ -1,0 +1,8 @@
+graph brainrot;
+int whitecap() {
+    ticker (!washed()) { aura_loss(25); jole("aura:", aura_check()); }
+    jole("bro is cooked");
+    aura_gain(1000);
+    assert(locked_in());
+    verify 0;
+}

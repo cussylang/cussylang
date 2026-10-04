@@ -1,0 +1,17 @@
+graph desmos;
+graph gd;
+graph brainrot;
+graph heliopolis(t) = (t, sin(t) + 0.2 * sin(9 * t));
+domain heliopolis [0, 20];
+int whitecap() {
+    Player player = player_new();
+    start_attempt(&player);
+    attempt (int day = 1; day <= 100; day++) {
+        advance(&player, 1);
+        check (day % 25 == 0) { yap("Heliopolis day %d: %.0f%% graphified\n", day, player.percent); }
+    }
+    plot heliopolis;
+    aura_gain(1000);
+    papa();
+    verify 0;
+}

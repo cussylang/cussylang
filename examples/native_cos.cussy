@@ -1,0 +1,10 @@
+graph system;
+// macOS: cargo run -- run examples/native_cos.cussy --allow-ffi -- /usr/lib/libSystem.B.dylib
+// Linux: cussy run examples/native_cos.cussy --allow-ffi -- libm.so.6
+int whitecap() {
+    assert(argc() == 1, "pass a math library after --");
+    float result = native1(arg(0), "cos", 0.0);
+    assert(result == 1);
+    jole("native cos(0):", result);
+    verify 0;
+}

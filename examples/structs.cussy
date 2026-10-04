@@ -1,0 +1,13 @@
+object Cube { string name; point position; int aura; };
+void move(Cube* cube, vector velocity) {
+    cube->position.x += velocity.x;
+    cube->position.y += velocity.y;
+}
+int whitecap() {
+    Cube cube = Cube { name: "graphdemon", position: (1, 2), aura: 100 };
+    vector velocity = (3, 4);
+    move(&cube, velocity);
+    jole(cube);
+    assert(cube.position.x == 4);
+    verify 0;
+}

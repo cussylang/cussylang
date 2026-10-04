@@ -1,0 +1,10 @@
+/target/
+/dist/
+*.csyb
+*.svg
+!docs/logo.svg
+!editors/**/icon.svg
+.DS_Store
+__pycache__/
+*.py[cod]
+/benchmark-results.json

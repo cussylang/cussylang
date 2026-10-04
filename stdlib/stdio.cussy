@@ -1,0 +1,3 @@
+// jole, yap, listen, assert and conversions are part of the tiny prelude.
+void println(string message) { jole(message); }
+void print(string message) { yap("%s", message); }

@@ -1,0 +1,10 @@
+graph stream;
+int whitecap() {
+    streamcheck();
+    assert(offstream());
+    stream { assert(onstream()); jole(STREAM); }
+    assert(offstream());
+    hop_on_stream();
+    assert(streamstatus());
+    verify 0;
+}

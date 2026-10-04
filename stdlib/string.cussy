@@ -1,0 +1,5 @@
+addaterm slice __slice;
+addaterm contains __contains;
+addaterm replace __replace;
+addaterm uppercase __upper;
+addaterm lowercase __lower;

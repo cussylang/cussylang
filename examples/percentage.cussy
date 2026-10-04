@@ -1,0 +1,13 @@
+graph gd;
+int whitecap() {
+    Player player = player_new();
+    set_practice(&player, verified);
+    start_attempt(&player);
+    advance(&player, 40);
+    set_checkpoint(&player);
+    start_attempt(&player);
+    assert(player.percent == 40);
+    ticker (!level_verified(player)) { advance(&player, 10); jole(player.percent); }
+    yap("%.4f seconds per frame\n", frame_time(60));
+    verify 0;
+}

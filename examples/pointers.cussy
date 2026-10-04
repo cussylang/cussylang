@@ -1,0 +1,13 @@
+graph memory;
+void boost(int* value) { *value += 50; }
+int whitecap() {
+    int aura = 100;
+    boost(&aura);
+    int* heap = alloc(aura);
+    *heap += 25;
+    jole("checked heap aura:", *heap);
+    free(heap);
+    heap = cooked;
+    assert(is_cooked(heap));
+    verify 0;
+}

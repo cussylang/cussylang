@@ -1,0 +1,53 @@
+{
+  "name": "cussy-language",
+  "displayName": "Cussy \u2014 compile, graph, jole",
+  "description": "Cussy language highlighting, snippets and local CLI tasks. Whitecaplol hop on stream.",
+  "version": "0.1.1",
+  "publisher": "cussy-community",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "cussy",
+        "aliases": [
+          "Cussy",
+          "cussy"
+        ],
+        "extensions": [
+          ".cussy",
+          ".csy"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cussy",
+        "scopeName": "source.cussy",
+        "path": "./syntaxes/cussy.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "cussy",
+        "path": "./snippets/cussy.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cussylang/cussylang.git",
+    "directory": "editors/vscode"
+  },
+  "homepage": "https://github.com/cussylang/cussylang",
+  "bugs": {
+    "url": "https://github.com/cussylang/cussylang/issues"
+  }
+}

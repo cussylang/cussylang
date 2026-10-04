@@ -1,0 +1,13 @@
+addaterm attempts unsigned long;
+addaterm aura int;
+addaterm jole string;
+addaterm megajole jole;
+addaterm PAPA "whitecaplol";
+addaterm say = jole;
+int whitecap() {
+    attempts count = 42;
+    aura power = 9001;
+    megajole message = "type names and value names live in separate namespaces";
+    say(PAPA, count, power, message);
+    verify 0;
+}

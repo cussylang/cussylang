@@ -1,0 +1,6 @@
+int whitecap() {
+    int* p = alloc(42);
+    free(p);
+    free(p);
+    verify 0;
+}

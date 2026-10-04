@@ -1,0 +1,22 @@
+locked float PI = 3.141592653589793;
+locked float TAU = 6.283185307179586;
+locked float E = 2.718281828459045;
+addaterm sin __sin;
+addaterm cos __cos;
+addaterm tan __tan;
+addaterm sqrt __sqrt;
+addaterm abs __abs;
+addaterm floor __floor;
+addaterm ceil __ceil;
+addaterm round __round;
+addaterm exp __exp;
+addaterm log __log;
+addaterm pow __pow;
+addaterm min __min;
+addaterm max __max;
+addaterm atan2 __atan2;
+float clamp(float value, float low, float high) {
+    assert(low <= high, "clamp requires low <= high");
+    verify min(max(value, low), high);
+}
+float lerp(float a, float b, float t) { verify a + (b - a) * t; }

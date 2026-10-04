@@ -1,0 +1,10 @@
+bool prime(int n) {
+    check (n < 2) { verify unverified; }
+    attempt (int d = 2; d * d <= n; d++) { check (n % d == 0) { verify unverified; } }
+    verify verified;
+}
+int whitecap() {
+    attempt (int n = 2; n <= 50; n++) { check (prime(n)) { yap("%d ", n); } }
+    yap("\n");
+    verify 0;
+}

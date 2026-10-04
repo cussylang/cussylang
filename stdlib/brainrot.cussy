@@ -1,0 +1,23 @@
+graph jole;
+graph stream;
+graph papa;
+graph math;
+locked int AURA_MAX = 1000000;
+locked bool COOKED = unverified;
+locked bool WASHED = unverified;
+locked bool PEAK = verified;
+locked bool LOCKED_IN = verified;
+int aura = 100;
+int aura_gain(int amount) { assert(amount >= 0, "aura_gain requires nonnegative amount"); aura += amount; verify aura; }
+int aura_loss(int amount) { assert(amount >= 0, "aura_loss requires nonnegative amount"); aura -= amount; verify aura; }
+int aura_check() { verify aura; }
+bool locked_in() { verify aura >= 100; }
+bool washed() { verify aura < 0; }
+void glaze(string who) { jole(who + " is graphpilled and papacoded"); }
+void unglaze(string who) { jole(who + " has been unglazed"); }
+void hardglaze(string who) { glaze(who); glaze(who); }
+void megaglaze(string who) { jole("aura++", who, "goated beyond the asymptote"); }
+void chat(string message) { jole("chat:", message); }
+void unc() { jole("unccompiler has entered the expression list"); }
+void peak() { jole("PEAK: slope so positive it left the domain"); }
+void jolemode() { jole("jolecore jolepilled joleware jolelang jolegraph"); }

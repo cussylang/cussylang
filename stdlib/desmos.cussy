@@ -1,0 +1,14 @@
+graph math;
+graph graph;
+object Slider { float value; float low; float high; float step; };
+object Regression { float slope; float intercept; float r2; };
+addaterm sum __sum;
+addaterm mean __mean;
+addaterm linspace __linspace;
+addaterm regression __regress;
+Slider slider(float value, float low, float high, float step) {
+    assert(low < high && step > 0, "slider requires low < high and positive step");
+    verify Slider { value: clamp(value, low, high), low: low, high: high, step: step };
+}
+void slide(Slider* s, float ticks) { s->value = clamp(s->value + ticks * s->step, s->low, s->high); }
+float predict(Regression model, float x) { verify model.slope * x + model.intercept; }

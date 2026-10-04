@@ -1,0 +1,3 @@
+// alloc(value), free(pointer), &value and *pointer are checked prelude operations.
+// No raw addresses, pointer arithmetic, malloc byte casts, or silent use-after-free.
+bool is_cooked(int* pointer) { verify pointer == cooked; }

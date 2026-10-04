@@ -1,0 +1,7 @@
+graph math;
+addaterm random __random;
+addaterm seed __seed;
+int random_int(int low, int high) {
+    assert(low < high, "random_int uses [low, high)");
+    verify low + to_int(floor(random() * to_float(high - low)));
+}

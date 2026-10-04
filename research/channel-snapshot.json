@@ -1,0 +1,408 @@
+{
+  "collected_local_date": "2026-10-03",
+  "coverage": "initial public Videos and Live pages; no pagination, transcripts or chat",
+  "channels": {
+    "whitecap": {
+      "metadata": {
+        "title": "whitecap",
+        "description": "Desmos Grapher. Putting the Geometry in Geometry Dash\n\nNot to be confused with mindcap",
+        "externalId": "UCrufgbM7-cIW_rvauaKwM4A",
+        "vanityChannelUrl": "http://www.youtube.com/@whitecaplol"
+      },
+      "videos": [
+        {
+          "title": "Blueskii's Cube Traced in Desmos",
+          "url": "https://www.youtube.com/watch?v=Z9NQ1sh7wNY"
+        },
+        {
+          "title": "iSpyWithMyGraphingCalculator",
+          "url": "https://www.youtube.com/watch?v=MB6mEbzbh8A"
+        },
+        {
+          "title": "I Spy in a Graphing Calculator (preview)",
+          "url": "https://www.youtube.com/watch?v=pJe2o5Ox-M0"
+        },
+        {
+          "title": "Daily Dose of Geometry Dash Introduction but Desmos",
+          "url": "https://www.youtube.com/watch?v=ab_lYa4N1Lc"
+        },
+        {
+          "title": "Thinking Space II in Desmos",
+          "url": "https://www.youtube.com/watch?v=X7Xz-Y0GQI4"
+        },
+        {
+          "title": "GD Colon Talking in Desmos",
+          "url": "https://www.youtube.com/watch?v=gUDc8IWZWWo"
+        },
+        {
+          "title": "Orbit but Desmos",
+          "url": "https://www.youtube.com/watch?v=9fai_LJkHjg"
+        },
+        {
+          "title": "Tidal Wave but in Desmos",
+          "url": "https://www.youtube.com/watch?v=knYunXNY88s"
+        },
+        {
+          "title": "Bad Apple but in Desmos",
+          "url": "https://www.youtube.com/watch?v=hFZsUzgCVYY"
+        },
+        {
+          "title": "Rush E - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=enW0WwzTzVg"
+        },
+        {
+          "title": "Cool Yellowstone Fall",
+          "url": "https://www.youtube.com/watch?v=MoEaxVENxeo"
+        },
+        {
+          "title": "Society (Top 1) - Desmos Audio Cover (w/ gameplay visuals)",
+          "url": "https://www.youtube.com/watch?v=auaNGK4_hVY"
+        },
+        {
+          "title": "Society - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=lyVTO9IIAvs"
+        },
+        {
+          "title": "Skeletal Shenanigans - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=3TMhPqMKTDY"
+        },
+        {
+          "title": "Heliopolis (Apoplexy) - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=iTJkaGtDGKU"
+        },
+        {
+          "title": "48 seconds of Looping the Rooms ENTIRELY IN DESMOS",
+          "url": "https://www.youtube.com/watch?v=5SVhy-DRm44"
+        },
+        {
+          "title": "Still Here With You - Desmos Audio Cover (Internal)",
+          "url": "https://www.youtube.com/watch?v=R5ZfN0hDfPc"
+        },
+        {
+          "title": "Limbo (Isolation) - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=yeXsRJrOltA"
+        },
+        {
+          "title": "Bossfight - Nock Em // Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=b0AYf7MAlOA"
+        },
+        {
+          "title": "Limbo but 200 keys and in Desmos",
+          "url": "https://www.youtube.com/watch?v=nkenSjQVrJs"
+        },
+        {
+          "title": "Angelicide - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=Qe8yurTF4P8"
+        },
+        {
+          "title": "MikuMikuMikuMiku - Remastered Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=pxioSgl9EiM"
+        },
+        {
+          "title": "Limbo Keys but Desmos",
+          "url": "https://www.youtube.com/watch?v=6iYvY4prh1Q"
+        },
+        {
+          "title": "MikuMikuMikuMiku - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=VxlLtWt8DTQ"
+        },
+        {
+          "title": "Dash - Remastered Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=Ybun35XHeVo"
+        },
+        {
+          "title": "The One Who’s Running the Show - Desmos Audio Cover (The Amazing Digital Circus)",
+          "url": "https://www.youtube.com/watch?v=cQkxSZkIXNY"
+        },
+        {
+          "title": "Thinking Space 2 - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=a2NEXe4whbU"
+        },
+        {
+          "title": "Looping the Rooms - Desmos Audio Cover",
+          "url": "https://www.youtube.com/watch?v=41w19cC3ghM"
+        },
+        {
+          "title": "Desmos plays Tidal Wave (Shiawase VIP)",
+          "url": "https://www.youtube.com/watch?v=bP6r5PQHpfY"
+        },
+        {
+          "title": "Orbit - Desmos Audio Cover (Animation Warrior Theme)",
+          "url": "https://www.youtube.com/watch?v=mBT0gAGCNyM"
+        }
+      ],
+      "streams": [
+        {
+          "title": "Assembling video + Q&A",
+          "url": "https://www.youtube.com/watch?v=XDgXA-C7rfQ"
+        },
+        {
+          "title": "Monopoly in Desmos with @desmos-guy",
+          "url": "https://www.youtube.com/watch?v=FqBwwHknYoI"
+        },
+        {
+          "title": "Day 13 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=jEHPv9ZM9CU"
+        },
+        {
+          "title": "Day 12 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=3RO8PMhuhsc"
+        },
+        {
+          "title": "Day 11 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=GWArRYU30o0"
+        },
+        {
+          "title": "Day 10 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=CnfvH1Gq_rM"
+        },
+        {
+          "title": "Day 9 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=uaBq_bsY0yc"
+        },
+        {
+          "title": "Day 8 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=Lho7VNFXaPY"
+        },
+        {
+          "title": "Final day of Graphing Blueskii",
+          "url": "https://www.youtube.com/watch?v=ATGQbTwCJrM"
+        },
+        {
+          "title": "Day 7 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=mB4u7aObqw8"
+        },
+        {
+          "title": "Day 3 of Graphing Blueskii",
+          "url": "https://www.youtube.com/watch?v=oIcznA-0TYk"
+        },
+        {
+          "title": "Day 6 of Graphing GD Colon",
+          "url": "https://www.youtube.com/watch?v=fUES4XuTKi8"
+        },
+        {
+          "title": "Day 2 of Graphing Blueskii",
+          "url": "https://www.youtube.com/watch?v=EW5VY3BKqm8"
+        },
+        {
+          "title": "Day 5 of Graphing GD Cologne",
+          "url": "https://www.youtube.com/watch?v=QChgskIUb-8"
+        },
+        {
+          "title": "Day 4 of Graphing GD Cologne",
+          "url": "https://www.youtube.com/watch?v=suW9B5jNE7Y"
+        },
+        {
+          "title": "Day 1 of Graphing Blueskii",
+          "url": "https://www.youtube.com/watch?v=OCefutyI5js"
+        },
+        {
+          "title": "I beat clutterfunk (streamed live)",
+          "url": "https://www.youtube.com/watch?v=p1vhSjagTPI"
+        },
+        {
+          "title": "Day 3 of Graphing GD Cologne",
+          "url": "https://www.youtube.com/watch?v=2AJ3ugJ-mWc"
+        },
+        {
+          "title": "Day 2 of Graphing GD Cologne",
+          "url": "https://www.youtube.com/watch?v=SFmfIysKH_U"
+        },
+        {
+          "title": "Looping the Rooms but it's Desmos Video and Audio",
+          "url": "https://www.youtube.com/watch?v=LyEYNdGv6-k"
+        },
+        {
+          "title": "Day 1 of Graphing GD Cologne",
+          "url": "https://www.youtube.com/watch?v=-HvMUqkEyfU"
+        },
+        {
+          "title": "Analyzing GD Cologne's website (Live)",
+          "url": "https://www.youtube.com/watch?v=GNARpGQzq4M"
+        }
+      ],
+      "sample_video": {
+        "title": "Limbo but 200 keys and in Desmos",
+        "videoId": "nkenSjQVrJs",
+        "channelId": "UCrufgbM7-cIW_rvauaKwM4A"
+      }
+    },
+    "desmos": {
+      "metadata": {
+        "title": "The Desmos Guy",
+        "description": "• Desmos enthusiast\n• Born in 2007\n• From South Korea 🇰🇷\n• Old GD channel: @cube_216",
+        "externalId": "UCKwoGWyPxg6up55ZZywjZUw",
+        "vanityChannelUrl": "http://www.youtube.com/@desmos-guy"
+      },
+      "videos": [
+        {
+          "title": "Grief 25%, but in Desmos calculator (predrop)",
+          "url": "https://www.youtube.com/watch?v=NvZhNfz0q9o"
+        },
+        {
+          "title": "Heliopolis in Desmos, but the Audio is ALSO made in Desmos",
+          "url": "https://www.youtube.com/watch?v=mgaR3cFkRCA"
+        },
+        {
+          "title": "Grief 9%, but in a graphing calculator",
+          "url": "https://www.youtube.com/watch?v=ejsHmWXQnbc"
+        },
+        {
+          "title": "[Top 1] Heliopolis 100% in Desmos",
+          "url": "https://www.youtube.com/watch?v=o54AnShNdEk"
+        },
+        {
+          "title": "150x timelapse of making Heliopolis in Desmos",
+          "url": "https://www.youtube.com/watch?v=kteUeK-Zk9E"
+        },
+        {
+          "title": "I made Dry Out in a graphing calculator (All 3 coins)",
+          "url": "https://www.youtube.com/watch?v=FoZiNKE6uMc"
+        },
+        {
+          "title": "The Desmos Guy beats Acu in Geometry Dash",
+          "url": "https://www.youtube.com/watch?v=aKXdhyTI8f4"
+        },
+        {
+          "title": "I made Polargeist in Desmos (All 3 coins)",
+          "url": "https://www.youtube.com/watch?v=-BhyKC682l4"
+        },
+        {
+          "title": "I made Nullscapes in Desmos graphing calculator (complete!)",
+          "url": "https://www.youtube.com/watch?v=Eu6l-f5S3q8"
+        },
+        {
+          "title": "The Desmos Guy Q&A (500 sub special)",
+          "url": "https://www.youtube.com/watch?v=CMmolCthbyI"
+        },
+        {
+          "title": "I made Sakupen Circles in Desmos",
+          "url": "https://www.youtube.com/watch?v=KAGFoDrU4Hk"
+        },
+        {
+          "title": "I recreated Nine Circle in a graphing calculator",
+          "url": "https://www.youtube.com/watch?v=VBSECjY7u00"
+        },
+        {
+          "title": "Desmos Monopoly Update [DESMOS MONOPOLY #2]",
+          "url": "https://www.youtube.com/watch?v=WFUjtjWgwpw"
+        },
+        {
+          "title": "I made Monopoly in a graphing calculator! [DESMOS MONOPOLY #1]",
+          "url": "https://www.youtube.com/watch?v=6Ln7-o1UeKw"
+        }
+      ],
+      "streams": [
+        {
+          "title": "(Day 98) Making Heliopolis in Desmos 98%",
+          "url": "https://www.youtube.com/watch?v=ylzvmRno7-g"
+        },
+        {
+          "title": "(Collab) Playing Monopoly with @whitecaplol and chat!",
+          "url": "https://www.youtube.com/watch?v=lEB7AFzDMZg"
+        },
+        {
+          "title": "Heliopolis in Desmos 92%!!",
+          "url": "https://www.youtube.com/watch?v=Jw_bH5gZg34"
+        },
+        {
+          "title": "(Day 87) Making 1% of Heliopolis in Desmos graphing calculator @mindcap.",
+          "url": "https://www.youtube.com/watch?v=rr7SUR5Pj9M"
+        },
+        {
+          "title": "(Day 86) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=cNGvI3E3Rms"
+        },
+        {
+          "title": "(Day 85) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=HOVbfTu0vaU"
+        },
+        {
+          "title": "(Day 77) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=YB4T1TGk2Po"
+        },
+        {
+          "title": "Desmos Guy AP score reveal!",
+          "url": "https://www.youtube.com/watch?v=03lXPOdH4i8"
+        },
+        {
+          "title": "(Day 53) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=aEoLg0L9p2Q"
+        },
+        {
+          "title": "(Day 50) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=gKD03GslrPg"
+        },
+        {
+          "title": "(Day 44) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=trh8QQ2v9Bc"
+        },
+        {
+          "title": "(Short stream) (Day 43) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=Yiq5cak1kjU"
+        },
+        {
+          "title": "(Short stream) (Day 42) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=-TdH3F8VhZs"
+        },
+        {
+          "title": "(Day 39) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=08zoeuQ2hN8"
+        },
+        {
+          "title": "(Day 38) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=ptfstOnDRTI"
+        },
+        {
+          "title": "(Day 37) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=qPwTd4OWPCM"
+        },
+        {
+          "title": "(Day 33) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=E47goP6Gsyo"
+        },
+        {
+          "title": "[1K SUB SPECIAL] Tutorial on how to make GD levels in Desmos",
+          "url": "https://www.youtube.com/watch?v=NVG1IjxMjCo"
+        },
+        {
+          "title": "(Day 1) Making 1% of Heliopolis in Desmos every day",
+          "url": "https://www.youtube.com/watch?v=GOieRschlFo"
+        },
+        {
+          "title": "(LIVE) Making Nullscapes in Desmos (finishing predrop)",
+          "url": "https://www.youtube.com/watch?v=Zt6IWS0fhv0"
+        },
+        {
+          "title": "(LIVE) Making Sakupen Circles in Desmos [#2]",
+          "url": "https://www.youtube.com/watch?v=ltt0MFjqj0I"
+        },
+        {
+          "title": "(LIVE) Making Sakupen Circles in Desmos [#1]",
+          "url": "https://www.youtube.com/watch?v=4L6IEo3tw0U"
+        },
+        {
+          "title": "(LIVE) Making Nine Circles in Desmos [#4]",
+          "url": "https://www.youtube.com/watch?v=fm4gTeOaESs"
+        },
+        {
+          "title": "(LIVE) Making Nine Circles in Desmos [#3]",
+          "url": "https://www.youtube.com/watch?v=aAzBNFiI87A"
+        },
+        {
+          "title": "(LIVE) Making Nine Circles in Desmos [#2]",
+          "url": "https://www.youtube.com/watch?v=HeyXum6Etsc"
+        },
+        {
+          "title": "(LIVE) Making Nine Circles in Desmos [#1]",
+          "url": "https://www.youtube.com/watch?v=oXBxjcqaceQ"
+        }
+      ],
+      "sample_video": {
+        "title": "[Top 1] Heliopolis 100% in Desmos",
+        "videoId": "o54AnShNdEk",
+        "channelId": "UCKwoGWyPxg6up55ZZywjZUw"
+      }
+    }
+  }
+}

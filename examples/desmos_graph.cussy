@@ -1,0 +1,13 @@
+graph desmos;
+graph parabola(x) = x^2 + 3x - 4;
+domain parabola [-10, 10];
+range parabola [-15, 50];
+int whitecap() {
+    list nums = [1, 2, 3, 4, 5];
+    list doubled = nums * 2;
+    jole("list graphmaxxing:", doubled);
+    Regression fit = regression(nums, doubled);
+    yap("slope %.2f; R2 %.2f\n", fit.slope, fit.r2);
+    plot parabola to "parabola.svg";
+    verify 0;
+}

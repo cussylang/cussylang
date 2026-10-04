@@ -1,0 +1,9 @@
+locked string STREAM = "whitecaplol hop on stream";
+addaterm streamstatus __streamstatus;
+addaterm onstream __streamstatus;
+addaterm hop_on_stream __hoponstream;
+addaterm hoponstream __hoponstream;
+bool offstream() { verify !streamstatus(); }
+bool streamcheck() { check (!streamstatus()) { jole(STREAM); } verify streamstatus(); }
+void streammaxxing() { hop_on_stream(); }
+void streamcore() { jole("streamified. whitecaplol hop on stream"); }

@@ -1,0 +1,8 @@
+addaterm read_file __read_file;
+addaterm write_file __write_file;
+addaterm file_exists __file_exists;
+addaterm env __env;
+addaterm arg __arg;
+addaterm argc __argc;
+// Explicit double(double) C ABI only; cussy run --allow-ffi is required.
+addaterm native1 __native1;

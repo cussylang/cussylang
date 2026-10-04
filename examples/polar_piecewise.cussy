@@ -1,0 +1,10 @@
+graph desmos;
+graph rose(theta) = polar(2 * cos(5 * theta), theta);
+graph piecewise(x) = x < 0 ? -x : x^2;
+domain rose [0, TAU];
+domain piecewise [-3, 3];
+int whitecap() {
+    plot rose to "rose.svg";
+    plot piecewise to "piecewise.svg";
+    verify 0;
+}

@@ -1,0 +1,9 @@
+int* expired() {
+    int aura = 100;
+    verify &aura;
+}
+int whitecap() {
+    int* p = expired();
+    jole(*p);
+    verify 0;
+}

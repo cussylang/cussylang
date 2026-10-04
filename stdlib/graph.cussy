@@ -1,0 +1,5 @@
+graph math;
+addaterm plot_points __plot_points;
+point polar(float radius, float angle) { verify (radius * cos(angle), radius * sin(angle)); }
+float magnitude(vector v) { verify sqrt(v.x * v.x + v.y * v.y); }
+float dot(vector a, vector b) { verify a.x * b.x + a.y * b.y; }

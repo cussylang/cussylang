@@ -1,0 +1,9 @@
+int fib(int n) {
+    check (n <= 1) { verify n; }
+    verify fib(n - 1) + fib(n - 2);
+}
+int whitecap() {
+    attempt (int i = 0; i < 12; i++) { yap("%d ", fib(i)); }
+    jole();
+    verify 0;
+}

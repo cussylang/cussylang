@@ -1,0 +1,11 @@
+graph gd;
+int whitecap() {
+    Player player = player_new();
+    attempt (int i = 0; i < 5; i++) {
+        start_attempt(&player);
+        advance(&player, 20 * (i + 1));
+        yap("Attempt %d | progress %.0f%%\n", player.attempts, player.percent);
+        check (level_verified(player)) { jole("VERIFIED"); crash; }
+    }
+    verify 0;
+}

@@ -1,0 +1,10 @@
+graph jole;
+int whitecap() {
+    jole("jole means jole. Not joke.");
+    rejole("jole");
+    megajole("joleware online");
+    jole(unjole("catastrophic jole exposure"));
+    joling();
+    jolemaxxing(3);
+    verify 0;
+}

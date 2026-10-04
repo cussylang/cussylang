@@ -1,0 +1,30 @@
+graph "level.cussy";
+graph desmos;
+graph brainrot;
+Level level = create_level();
+graph path(t) = (t, level.wave_height * sin(t));
+domain path [0, 20];
+int whitecap() {
+    Player player = player_new();
+    LevelObject wall = LevelObject { id: 1, position: (8, 0), bounds: Hitbox { x: 8, y: 0, width: 1, height: 1 }, solid: verified };
+    Slider speed = slider(1, 0.5, 2, 0.25);
+    set_practice(&player, verified);
+    start_attempt(&player);
+    stream {
+        attempt (int frame = 0; frame < level.frames; frame++) {
+            float x = to_float(frame) / level.frames * 20;
+            Hitbox cube = Hitbox { x: x, y: level.wave_height * sin(x), width: 0.2, height: 0.2 };
+            check (wall.solid && hits(player, cube, wall.bounds)) {
+                aura_loss(5);
+                start_attempt(&player);
+                set_noclip(&player, verified);
+            }
+            advance(&player, speed.value * 100.0 / level.frames);
+            check (frame == 60) { set_checkpoint(&player); }
+        }
+    }
+    plot path to "graphdash.svg";
+    yap("%s: %d attempts, %.2f%%, aura %d\n", level.name, player.attempts, player.percent, aura_check());
+    papa();
+    verify 0;
+}

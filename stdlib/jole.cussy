@@ -1,0 +1,7 @@
+locked string JOLE = "jole";
+void rejole(string message) { jole(message); jole(message); }
+string unjole(string message) { verify "unjoled: " + message; }
+void megajole(string message) { jole("MEGAJOLE", message); }
+void joling() { jole("joling -> joled -> jolemaxxing"); }
+void jolemaxxing(int count) { assert(count >= 0, "negative jole count"); attempt (int i = 0; i < count; i++) { jole(); } }
+point jolepoint(float x, float y) { verify (x, y); }

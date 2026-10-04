@@ -1,0 +1,5 @@
+graph desmos;
+graph circle(t) = (cos(t), sin(t));
+domain circle [0, TAU];
+range circle [-1.2, 1.2];
+int whitecap() { plot circle to "circle.svg"; verify 0; }

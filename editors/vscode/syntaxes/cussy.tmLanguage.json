@@ -1,0 +1,95 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Cussy",
+  "scopeName": "source.cussy",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "string.quoted.double.cussy",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.cussy",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.single.cussy",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.cussy",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "keyword.control.cussy",
+      "match": "\\b(check|otherwise|ticker|attempt|crash|noclip|verify|trigger|checkpoint|practice|if|else|while|for|break|continue|return|switch|case|default|stream)\\b"
+    },
+    {
+      "name": "keyword.other.cussy",
+      "match": "\\b(graph|domain|range|plot|to|addaterm|object|struct|lore|locked|const)\\b"
+    },
+    {
+      "name": "storage.type.cussy",
+      "match": "\\b(int|long|unsigned|float|double|char|string|bool|void|point|vector|list)\\b"
+    },
+    {
+      "name": "constant.language.cussy",
+      "match": "\\b(verified|unverified|true|false|cooked|NULL)\\b"
+    },
+    {
+      "name": "constant.numeric.cussy",
+      "match": "\\b[0-9][0-9_]*(?:\\.[0-9_]*)?(?:[eE][+-]?[0-9]+)?u?\\b"
+    },
+    {
+      "name": "support.function.cussy",
+      "match": "\\b(jole|yap|listen|assert|len|hitbox|to_int|to_float|to_string|alloc|free|papa|hop_on_stream|streamstatus|streamcheck|aura_gain|aura_loss|glaze|regression|slider)\\b(?=\\s*\\()"
+    },
+    {
+      "name": "entity.name.function.cussy",
+      "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()"
+    },
+    {
+      "name": "keyword.operator.cussy",
+      "match": "[+*/%^=!<>&|?:-]+"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.cussy",
+          "begin": "//",
+          "end": "$"
+        },
+        {
+          "name": "comment.block.cussy",
+          "begin": "/\\*",
+          "end": "\\*/",
+          "patterns": [
+            {
+              "include": "#block-comment"
+            }
+          ]
+        }
+      ]
+    },
+    "block-comment": {
+      "name": "comment.block.cussy",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#block-comment"
+        }
+      ]
+    }
+  }
+}

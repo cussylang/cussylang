@@ -1,0 +1,2 @@
+addaterm ticker_time __clock;
+addaterm sleep __sleep;

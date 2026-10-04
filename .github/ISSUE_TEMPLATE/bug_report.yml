@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a reproducible problem with Cussy.
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Cussy version
+      description: Run `cussy --version`.
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Operating system and CPU
+      placeholder: Windows 11 x64, macOS 14 arm64, Ubuntu 22.04 x64, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Smallest example and command that reproduce the problem
+      description: Include relevant imports and remove private file paths or data.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Include the full diagnostic or error output.
+    validations:
+      required: true

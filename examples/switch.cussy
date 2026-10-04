@@ -1,0 +1,10 @@
+lore Difficulty { AUTO, EASY, DEMON = 10 };
+int whitecap() {
+    Difficulty level = DEMON;
+    trigger (level) {
+        checkpoint 0: jole("auto"); crash;
+        checkpoint 10: jole("extreme jole demon"); crash;
+        practice: jole("keep attempting");
+    }
+    verify 0;
+}

@@ -1,0 +1,50 @@
+{
+  "Papa entry point": {
+    "prefix": "whitecap",
+    "body": [
+      "int whitecap() {",
+      "    ${1:jole(\"hello, jole\");}",
+      "    verify 0;",
+      "}"
+    ],
+    "description": "A complete Cussy entry point"
+  },
+  "Attempt loop": {
+    "prefix": "attempt",
+    "body": [
+      "attempt (int ${1:i} = 0; ${1:i} < ${2:10}; ${1:i}++) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Three-clause attempt loop"
+  },
+  "Graph expression": {
+    "prefix": "graphfn",
+    "body": [
+      "graph ${1:f}(${2:x}) = ${3:x^2};",
+      "domain ${1:f} [${4:-10}, ${5:10}];",
+      "int whitecap() {",
+      "    plot ${1:f};",
+      "    verify 0;",
+      "}"
+    ],
+    "description": "Complete graph program"
+  },
+  "Hop on stream": {
+    "prefix": "stream",
+    "body": [
+      "stream {",
+      "    jole(\"whitecaplol hop on stream\");",
+      "    $0",
+      "}"
+    ],
+    "description": "Scoped stream status"
+  },
+  "Add a term": {
+    "prefix": "addaterm",
+    "body": [
+      "addaterm ${1:attempts} ${2:unsigned long};"
+    ],
+    "description": "Transparent type alias"
+  }
+}

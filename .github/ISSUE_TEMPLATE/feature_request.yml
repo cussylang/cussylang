@@ -1,0 +1,17 @@
+name: Feature request
+description: Propose an improvement to Cussy.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Include a concrete Cussy program or workflow if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe how you would use the improvement and any alternatives.
+    validations:
+      required: true

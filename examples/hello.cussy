@@ -1,0 +1,5 @@
+graph stdio;
+int whitecap() {
+    jole("Hello, Cussy!");
+    verify 0;
+}

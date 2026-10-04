@@ -1,0 +1,11 @@
+// Repeated small calls make interpreter call overhead visible.
+int increment(int n) { verify n + 1; }
+
+int whitecap() {
+    int total = 0;
+    attempt (int i = 0; i < 100000; i++) {
+        total += increment(i);
+    }
+    jole(total);
+    verify 0;
+}
