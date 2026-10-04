@@ -7,6 +7,7 @@ reproducible example for bugs or a concrete use case for language changes.
 ## Local setup
 
 Install Rust and Cargo at the minimum version listed in `Cargo.toml` or newer,
+plus Clang and your platform's C development tools for native compiler tests,
 then clone the repository:
 
 ```sh
@@ -35,6 +36,11 @@ cargo clippy --locked --all-targets -- -D warnings
 cargo test --locked
 cargo build --locked --release
 ```
+
+Set `CUSSY_REQUIRE_NATIVE=1` to fail if the native test compiler is missing; CI
+always enables this. `CUSSY_CC` can select a GCC/Clang executable. Tests compare
+compiled programs with the interpreter, check native errors and evaluation order,
+and execute programs after removing their source files.
 
 On macOS/Linux, `./scripts/verify.sh` runs the same checks. To verify a release
 archive as well, run `python3 scripts/package.py --smoke-test` with Python 3.9 or

@@ -48,8 +48,8 @@ a checked interpreter with the same execution model.
 
 ## Comparison with other languages
 
-The [README table](../README.md#performance) compares five implementations of
-three identical algorithms:
+The [README table](../README.md#performance) compares five languages across six execution modes for
+three identical algorithms (Cussy runs both interpreted and natively compiled):
 
 - Recursive Fibonacci(24), returning `46368`.
 - 200,000 iterations of `x = (x * 1664525 + 1013904223) % 2147483647`,
@@ -69,7 +69,7 @@ cargo build --release --locked
 python3 scripts/compare_languages.py --json language-results.json
 ```
 
-Use `python` on Windows if needed. All five implementations are required; missing
+Use `python` on Windows if needed. All five language toolchains are required; missing
 tools fail explicitly. `--cussy PATH`, `--runs N`, and `--warmup N` allow another
 Cussy executable or sample count. The checked-in report uses seven samples after
 one warmup for each program. Python is invoked directly without a version-manager
@@ -83,15 +83,29 @@ caches but does not preserve a JavaScript JIT between processes. The runner allo
 native inlining and constant folding; it adds no artificial `volatile` operations
 or `noinline` restrictions. Native build time is excluded.
 
-The [October 3, 2026 report](results/languages-macos-arm64-0.1.1.json) records
-Apple M1 Max/macOS 26.6.2 arm64, Cussy 0.1.1 release, Apple Clang 17.0.0 `-O3`,
+The [October 3, 2026 report](results/languages-macos-arm64-0.2.0.json) records
+Apple M1 Max/macOS 26.6.2 arm64, Cussy 0.2.0 interpreted and native, Apple Clang 17.0.0 `-O3`,
 Rust 1.96.1 `-O`, CPython 3.10.14, and Node.js 22.22.0. It includes compiler flags,
 tool and program SHA-256 hashes, all samples, medians, minimums/maximums, and run
 order. The runner rejects changes to tools or source files during measurement.
 
-The short prime workload illustrates startup costs: Cussy's command finished
-before Python and Node here, while both finished before Cussy on the two longer
-workloads. Native C and Rust were faster across all three. These measurements do
-not isolate execution throughput or assess memory usage, long-running JIT code,
-I/O-heavy applications, or other machines. They should not be used as a universal
-language-speed claim.
+Native Cussy uses `cussy compile --cc clang` with default `-O3`, checked integer
+arithmetic, `-fno-fast-math`, and `-ffp-contract=off`. It receives the exact same
+`.cussy` input as the interpreter. All Cussy-native, C, and Rust executables finish
+compilation before timing. Each Cussy native executable runs directly without
+invoking the Cussy driver. Its command, hash, and seven samples are in the report.
+
+| Workload | Interpreter (ms) | Native Cussy (ms) | Interpreter/native ratio |
+|---|---:|---:|---:|
+| Fibonacci(24) | 121.165 | 8.772 | 13.81× |
+| Integer recurrence, 200k | 88.949 | 5.477 | 16.24× |
+| Primes ≤3000 | 24.120 | 5.060 | 4.77× |
+
+Native Cussy was 4.77–16.24× faster than its interpreter here. Its elapsed times
+were 1.06–1.25× those of C and 0.76–1.59× those of Rust. These short CLI
+workloads include substantial startup cost, so they do not isolate execution
+throughput or establish general equivalence with C. They do not assess memory
+usage, long-running JIT code, I/O-heavy applications, or other machines.
+
+The earlier [v0.1.1 interpreter-only report](results/languages-macos-arm64-0.1.1.json)
+is preserved as a historical measurement; its samples were collected separately.

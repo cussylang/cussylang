@@ -1,17 +1,17 @@
 [package]
 name = "cussy"
-version = "0.1.1"
+version = "0.2.0"
 edition = "2024"
 rust-version = "1.88"
-description = "C, but somebody opened Desmos. A statically checked interpreter with catastrophic jole exposure."
-license = "MIT"
+description = "C, but somebody opened Desmos. A checked language with native compilation, an interpreter, and graphing."
+license = "MIT AND BSL-1.0"
 repository = "https://github.com/cussylang/cussylang"
 homepage = "https://github.com/cussylang/cussylang"
 documentation = "https://github.com/cussylang/cussylang/blob/main/docs/language.md"
 readme = "README.md"
-keywords = ["language", "interpreter", "graphing", "cussy"]
+keywords = ["language", "compiler", "interpreter", "graphing", "cussy"]
 categories = ["compilers", "command-line-utilities"]
-include = ["src/**", "stdlib/**", "docs/**", "examples/**", "tests/**", "Cargo.toml", "Cargo.lock", "README.md", "LICENSE"]
+include = ["src/**", "stdlib/**", "docs/**", "examples/**", "tests/**", "benchmarks/**", "scripts/**", "editors/**", "research/**", "Cargo.toml", "Cargo.lock", "README.md", "LICENSE", "CHANGELOG.md", "CONTRIBUTING.md", "SECURITY.md", "CODE_OF_CONDUCT.md"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }

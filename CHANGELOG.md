@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.0 — 2026-10-03
+
+- Add `cussy compile` for standalone executables, assembly, object files, and
+  inspectable C. The scalar backend uses typed native operations and Clang/GCC
+  `-O3` optimization, with optional CPU tuning and no interpreter fallback.
+- Preserve evaluation order, checked integer arithmetic, source diagnostics,
+  Unicode string output, call-depth checks, and global initialization rules.
+- Add an adapted, Boost-licensed Ryu formatter for native floating-point output,
+  differential validation, and compiler regression tests against the interpreter.
+- Reject unsupported aggregate, pointer, graph, dynamic-string, and host operations
+  explicitly; the full interpreter remains available through `cussy run`.
+- Publish native and interpreter benchmark results separately, and require native
+  compilation and standalone execution in platform CI and package smoke tests.
+- Stage compiler output so generation/toolchain errors preserve existing files.
+
 ## 0.1.1 — 2026-10-03
 
 - Share function bodies and retain global storage across calls to reduce

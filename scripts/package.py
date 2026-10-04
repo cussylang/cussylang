@@ -96,10 +96,15 @@ def smoke_test(archive_path, prefix, executable, version):
         if not (root / "graphdash.svg").is_file():
             raise SystemExit("Packaged graphdash example did not create its graph")
         run("build", "examples/hello.cussy", "-o", "hello.csyb")
+        native = root / ("hello-native.exe" if executable.endswith(".exe") else "hello-native")
+        run("compile", "examples/hello.cussy", "-o", str(native))
         shutil.rmtree(root / "examples")
         shutil.rmtree(root / "stdlib")
         if "Hello, Cussy!" not in run("run", "hello.csyb"):
             raise SystemExit("Packaged artifact did not run independently")
+        native_output = subprocess.check_output([str(native)], cwd=root, text=True, timeout=60)
+        if "Hello, Cussy!" not in native_output:
+            raise SystemExit("Native executable did not run independently")
     print(f"Smoke tests passed: {archive_path.name}")
 
 

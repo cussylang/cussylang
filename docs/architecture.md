@@ -1,6 +1,6 @@
 # Architecture and engineering boundaries
 
-Cussy 0.1.1 is a Rust library plus a binary. The dependencies are serde and
+Cussy 0.2.0 is a Rust library plus a binary. The Rust dependencies are serde and
 serde_json, used for versioned AST images. Standard libraries are Cussy source
 embedded with `include_str!`; their host operations are implemented in Rust.
 
@@ -12,6 +12,8 @@ flowchart LR
     Parser --> AST[AST]
     AST --> Check[Names, types, mutability, return analysis]
     Check --> Runtime[Tree interpreter]
+    Check --> C[Typed scalar C]
+    C --> Native[Clang/GCC optimization and machine code]
     Check --> Image[.csyb checked AST image]
     Image --> Check
     Runtime --> Host[File I/O, math, clock, SVG, optional C FFI]
@@ -31,6 +33,10 @@ flowchart LR
 | `ffi.rs` | Small opt-in Unix dlopen double(double) boundary |
 | `formatter.rs` | Comment-aware, token-preserving layout |
 | `main.rs` | CLI, artifact serialization, persistent REPL |
+| `codegen.rs` | Checked scalar native lowering and explicit unsupported diagnostics |
+| `compile.rs` | Optimization flags, compiler invocation, staged output publication |
+| `codegen_runtime.h` | Native arithmetic, strings, formatting and diagnostics |
+| `codegen_float.h` | Adapted Ryu binary64 formatting with bundled Boost license |
 
 ## Type and storage model
 
@@ -59,6 +65,13 @@ No concurrency is implemented. Object destruction is not user-programmable.
 
 ## Build format
 
+`cussy compile` emits typed GNU C11 for the supported scalar subset, then invokes
+Clang/GCC to emit assembly, an object, or an executable. It uses native values and
+function calls and does not embed the interpreter. Checked arithmetic, call depth,
+and output limits remain; the interpreter fuel budget is not applied to native
+execution. [Native compilation](native.md) documents its supported operations and
+toolchain. The following format belongs to the separate `cussy build` command.
+
 `.csyb` is a JSON object tagged `cussy-ast-v1` plus the exact package version and a
 serialized Program. It contains imported AST nodes and source text for diagnostics.
 It contains no native machine code, optimizer output, or embedded runtime. Loading
@@ -85,7 +98,8 @@ with normal filesystem/environment capabilities, not a security boundary.
   nonlinear regression, 3D renderer, or interactive plot controls.
 - `addaterm` aliases types, values and ordinary functions. No general macros,
   namespaces, package manager, generics, overloads, raw pointer casts, bitwise ops,
-  union, goto, volatile/static qualifiers, optimizer, or native backend.
+  union, goto, or volatile/static qualifiers. Native optimization applies only to
+  the supported scalar subset; aggregate and graph programs use the interpreter.
 - No exceptions/catch, async tasks, threads, debugger, LSP, Desmos API access,
   YouTube live status, or live Geometry Dash integration.
 - Dynamic FFI is Unix-only and explicitly unsafe. ABI mistakes bypass interpreter

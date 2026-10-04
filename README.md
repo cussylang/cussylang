@@ -6,7 +6,8 @@
 [![Release](https://img.shields.io/github/v/release/cussylang/cussylang)](https://github.com/cussylang/cussylang/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Cussy is a statically checked, C-inspired interpreted language written in Rust.
+Cussy is a statically checked, C-inspired language with a native compiler and
+an interpreter, written in Rust.
 Curly braces, semicolons, functions, arrays, structures, checked pointers—and
 actual graph rendering. Its own lexer, parser, type checker, runtime, module
 loader, standard library, REPL, formatter, and deliberately excessive jole lore.
@@ -28,7 +29,7 @@ and run `bin/cussy` (`bin/cussy.exe` on Windows). See the
 1.88 or newer, then:
 
 ```sh
-cargo install --git https://github.com/cussylang/cussylang --tag v0.1.1 --locked
+cargo install --git https://github.com/cussylang/cussylang --tag v0.2.0 --locked
 cussy --version
 ```
 
@@ -44,6 +45,29 @@ cargo run --release -- run examples/hello.cussy
 `target/release/cussy` is the standalone executable (`cussy.exe` on Windows).
 The standard library is embedded: there are no runtime packages to install.
 Unix users can also run `./cussy`, the local incremental-build launcher.
+
+## Compile to machine code
+
+With Clang installed, compile a `.cussy` program to an optimized executable:
+
+```sh
+cussy compile examples/fibonacci.cussy -o fibonacci
+./fibonacci
+cussy compile examples/fibonacci.cussy --emit asm -o fibonacci.s
+```
+
+Use `-o fibonacci.exe` on Windows. Native compilation defaults to `-O3`; optional
+`--cpu native` tunes for the build machine. Executables run without Cussy installed.
+`--emit obj` produces an object file, and `--emit c` exposes the generated C.
+The pipeline lowers checked Cussy to typed C and uses Clang/GCC to optimize and
+generate machine code. It contains no interpreter fallback.
+
+The native backend supports the scalar core: numbers, booleans, characters,
+immutable strings, functions, variables, loops, conditionals, math, and basic I/O.
+Graphs, arrays, structures, pointers, dynamic strings, and some library operations
+still use `cussy run`; unsupported native constructs produce a clear compile error.
+See the [native compilation guide](docs/native.md) for toolchains, supported
+operations, checks, and optimization flags.
 
 ## Start joling
 
@@ -123,25 +147,27 @@ answer for its workload.
 
 | Language / implementation | Fibonacci(24) | Integer recurrence, 200k iterations | Count primes ≤3000 |
 |---|---:|---:|---:|
-| **Cussy 0.1.1**, release build | **89.87** | **115.11** | **21.38** |
-| C, Apple Clang 17.0.0 `-O3` | 5.57 | 9.07 | 7.32 |
-| Rust 1.96.1 `-O` | 6.02 | 11.29 | 7.07 |
-| Python, CPython 3.10.14 | 45.86 | 70.41 | 34.57 |
-| JavaScript, Node.js 22.22.0 | 42.64 | 74.98 | 42.96 |
+| **Cussy 0.2.0 native**, Clang `-O3` | 8.77 | 5.48 | 5.06 |
+| Cussy 0.2.0 interpreter, release build | 121.16 | 88.95 | 24.12 |
+| C, Apple Clang 17.0.0 `-O3` | 7.02 | 5.17 | 4.16 |
+| Rust 1.96.1 `-O` | 5.52 | 7.18 | 4.75 |
+| Python, CPython 3.10.14 | 50.50 | 66.35 | 37.99 |
+| JavaScript, Node.js 22.22.0 | 51.83 | 58.93 | 56.80 |
 
 These measurements include process startup, source parsing where applicable,
 execution, and shutdown. Native compilation happens before timing, with compiler
-optimizations enabled. Short commands are sensitive to startup costs; the prime
-result does not establish faster interpreter throughput than Python or JavaScript.
-C and Rust completed all three workloads faster than Cussy on this machine.
+optimizations enabled. Native Cussy completed these commands **4.8–16.2× faster than its interpreter**.
+Native Cussy took 1.06–1.25× C's elapsed time in these runs.
+Short commands are sensitive to process startup costs; these are not isolated execution-throughput
+measurements or long-running JIT benchmarks.
 
 [Equivalent source programs](benchmarks/languages),
-[raw samples and environment metadata](benchmarks/results/languages-macos-arm64-0.1.1.json),
+[raw samples and environment metadata](benchmarks/results/languages-macos-arm64-0.2.0.json),
 and [methodology and reproduction commands](benchmarks/README.md#comparison-with-other-languages)
 are included. These results describe these programs and this machine, not a
 general ranking of languages.
 
-Cussy keeps its checked interpreter semantics. Function bodies are shared and call
+The interpreter keeps its existing checked semantics. Function bodies are shared and call
 frames reuse global storage, reducing call overhead. The
 [benchmark suite](benchmarks/README.md) contains reproducible workloads and measured
 results; those are workload-specific improvements, not a claim of C execution speed.
@@ -152,13 +178,15 @@ results; those are workload-specific improvements, not a claim of C execution sp
 - [Standard library](docs/stdlib.md), [CLI and REPL](docs/cli.md)
 - [Architecture and limits](docs/architecture.md)
 - [Installation and distributions](docs/distribution.md)
+- [Native compilation and assembly](docs/native.md)
 - [Channel research and attribution](docs/research.md)
 - [VS Code extension starter](editors/vscode/README.md)
 - [Full lore inventory](docs/lore.txt)
 
-Cussy 0.1 is a small interpreted language with checked pointers and local SVG plots.
-It has no native-code backend, raw pointer arithmetic, GUI graph controls, LSP, or
-live Geometry Dash integration. The explicit FFI boundary can call unsafe native
+Cussy 0.2 includes native compilation for its scalar core and an interpreter for
+the full language, including checked pointers and local SVG plots. It has no raw
+pointer arithmetic, GUI graph controls, LSP, or live Geometry Dash integration.
+The explicit FFI boundary can call unsafe native
 code. See the architecture guide for precise semantics and resource limits.
 
 ## Contribute
@@ -181,4 +209,5 @@ Installing Cussy may cause spontaneous graphing, excessive jole usage, and
 unexplained urges to tell whitecaplol to hop on stream.
 
 **jole means jole. Not joke.** Unofficial fan project; no creator or platform
-endorsement is implied. [MIT licensed](LICENSE).
+endorsement is implied. Original code is [MIT licensed](LICENSE); the native
+floating-point printer includes [Ryu under the Boost license](src/vendor/ryu/NOTICE.md).

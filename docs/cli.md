@@ -5,6 +5,8 @@ cussy run source.cussy [--fuel N] [--allow-ffi] [-- args...]
 cussy run image.csyb [same options]
 cussy check source.cussy
 cussy build source.cussy [-o output.csyb]
+cussy compile source.cussy [-o program] [--emit exe|asm|obj|c] [-O0|-O1|-O2|-O3|-Os]
+cussy compile source.cussy [--cc PATH] [--cpu native]
 cussy fmt source.cussy [--stdout | --check]
 cussy repl
 cussy --version
@@ -27,6 +29,11 @@ modes add `whitecaplol is our papa`.
   Default output replaces the source suffix with `.csyb`. It never overwrites a
   loaded source path. No standalone native executable or Rust compiler is needed
   to run a built image; the Cussy runtime is required.
+- `compile`: generate a native executable (default), assembly (`--emit asm`), an
+  object (`--emit obj`), or GNU C11 source (`--emit c`). Compilation defaults to
+  `-O3`; `--cpu native` tunes for the build machine. `--cc` or `CUSSY_CC` selects
+  a Clang/GCC executable. Native executables run without Cussy. Unsupported
+  operations fail explicitly. See the [native guide](native.md).
 - `fmt`: writes token-preserving formatting in place. `--stdout` previews it;
   `--check` leaves the file alone and exits 1 if formatting would change it.
   Strings and comment content remain comments; the formatter does not type-check.
@@ -35,7 +42,9 @@ modes add `whitecaplol is our papa`.
   filesystem calls, sleeps, or native functions. Every recursive call is also subject
   to a depth limit of 128.
 - `--allow-ffi`: enables the explicitly unsafe dynamic-library boundary on Unix.
-- `--`: remaining tokens become the program's `arg()` values.
+- `--`: for `run`/`repl`, remaining tokens become the program's `arg()` values.
+  For `compile`, it ends option parsing; compiled programs receive their own
+  command-line arguments when launched.
 
 Driver/type/runtime errors exit 1; usage errors exit 2. Invalid or incompatible
 build images are rejected. Artifacts require the exact Cussy version that built
@@ -45,7 +54,7 @@ them. Treat sources and artifacts as executable programs, not a sandbox format.
 
 ```text
 $ cussy repl
-CUSSY REPL v0.1.1
+CUSSY REPL v0.2.0
 C + Desmos + Geometry Dash + irreversible jole exposure
 whitecaplol is our papa
 whitecaplol hop on stream

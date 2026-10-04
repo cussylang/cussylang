@@ -18,8 +18,11 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 ROOT = Path(__file__).resolve().parent.parent
 SOURCE_DIR = ROOT / "benchmarks" / "languages"
-LANGUAGES = ("cussy", "c", "rust", "python", "javascript")
-EXTENSIONS = dict(zip(LANGUAGES, ("cussy", "c", "rs", "py", "js")))
+LANGUAGES = ("cussy", "cussy_native", "c", "rust", "python", "javascript")
+EXTENSIONS = {
+    "cussy": "cussy", "cussy_native": "cussy", "c": "c",
+    "rust": "rs", "python": "py", "javascript": "js",
+}
 C_FLAGS = ["-O3", "-std=c11", "-Wall", "-Wextra", "-pedantic"]
 RUST_FLAGS = ["-O", "--edition=2024"]
 
@@ -149,6 +152,8 @@ def main():
             "interpreted_inputs": "source parsing/checking and execution included",
             "native_compilation": "completed before all warmups and timed runs; excluded",
             "cussy_build": "cargo build --release (thin LTO, stripped)",
+            "cussy_native_build": "cussy compile with default -O3 optimization and --cc clang",
+            "cussy_native_flags": ["-std=gnu11", "-O3", "-fno-fast-math", "-ffp-contract=off"],
             "cussy_fuel": 50000000,
             "c_flags": C_FLAGS,
             "rust_flags": RUST_FLAGS,
@@ -156,7 +161,7 @@ def main():
             "warmup_processes_per_case_language": args.warmup,
             "warmup_scope": "fresh processes: warm filesystem/OS caches, no persistent JIT state",
             "order": "rotate language order by case index plus sample index",
-            "inputs": "same fixed constants and algorithms in all five languages",
+            "inputs": "same fixed constants and algorithms in five languages; Cussy source is identical for interpreted and native modes",
             "arithmetic": "integer intermediates below 2^53; exact in JavaScript and i64",
             "validation": "exit status and exact stdout checked on every process",
             "reference_algorithms": "iterative Fibonacci, affine exponentiation, prime sieve",
@@ -176,8 +181,19 @@ def main():
             source_hashes.update({path: digest(path) for path in sources.values()})
             native_binaries = {}
             compile_commands = {}
+            suffix = ".exe" if os.name == "nt" else ""
+            native_cussy = build / f"{case}-cussy_native{suffix}"
+            subprocess.run(
+                [str(cussy), "compile", str(sources["cussy"]), "-o", str(native_cussy),
+                 "--cc", str(tools["clang"])],
+                check=True, capture_output=True, text=True,
+            )
+            native_binaries["cussy_native"] = native_cussy
+            compile_commands["cussy_native"] = [
+                "cussy", "compile", str(sources["cussy"].relative_to(ROOT)),
+                "-o", "<build>/" + native_cussy.name, "--cc", "clang",
+            ]
             for language, compiler, flags in (("c", "clang", C_FLAGS), ("rust", "rustc", RUST_FLAGS)):
-                suffix = ".exe" if os.name == "nt" else ""
                 binary = build / f"{case}-{language}{suffix}"
                 source = sources[language]
                 subprocess.run(
@@ -190,6 +206,7 @@ def main():
                 ]
             commands[case] = {
                 "cussy": [str(cussy), "run", str(sources["cussy"]), "--fuel", "50000000"],
+                "cussy_native": [str(native_cussy)],
                 "c": [str(native_binaries["c"])],
                 "rust": [str(native_binaries["rust"])],
                 "python": [str(tools["python"]), str(sources["python"])],

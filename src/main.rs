@@ -23,6 +23,9 @@ fn help() {
     println!(
         "Cussy {VERSION} — C, but somebody opened Desmos.\n\nUsage:\n  cussy run <file.cussy|file.csyb> [--fuel N] [--allow-ffi] [-- args...]\n  cussy build <file.cussy> [-o file.csyb]\n  cussy check <file.cussy|file.csyb>\n  cussy fmt <file.cussy> [--check|--stdout]\n  cussy repl\n  cussy jole|stream|papa|aura|cooked|lore\n\nDiagnostics: --normal (default), --brainrot, --jole\nBuild emits a checked, portable AST image; run it with this Cussy version.\njole means jole. Not joke."
     );
+    println!(
+        "\nNative compilation:\n  cussy compile <file.cussy> [-o program] [--emit exe|asm|obj|c]\n                [-O0|-O1|-O2|-O3|-Os] [--cc PATH] [--cpu native]\nUses Clang (or CUSSY_CC / --cc), defaults to -O3; native programs run independently."
+    );
 }
 fn main() {
     // Keep the interpreter's documented nesting limits independent of the
@@ -52,6 +55,9 @@ fn cli() -> i32 {
     if args[0] == "--version" || args[0] == "-V" {
         println!("cussy {VERSION}");
         return 0;
+    }
+    if args[0] == "compile" {
+        return compile_cli(&args[1..]);
     }
     let mut mode = "normal";
     let mut personality_selected = false;
@@ -265,6 +271,120 @@ fn cli() -> i32 {
         Ok(code) => (code & 255) as i32,
         Err(e) => {
             eprint!("{}", e.render(&p.sources, mode));
+            1
+        }
+    }
+}
+fn compile_cli(args: &[String]) -> i32 {
+    use cussy::compile::{Emit, Options};
+    let mut options = Options::default();
+    let mut input = None;
+    let mut output = None;
+    let mut mode = "normal";
+    let mut personality_selected = false;
+    let mut end_options = false;
+    let mut i = 0;
+    while i < args.len() {
+        let argument = args[i].as_str();
+        if !end_options {
+            match argument {
+                "--help" | "-h" => {
+                    help();
+                    return 0;
+                }
+                "--" => {
+                    end_options = true;
+                    i += 1;
+                    continue;
+                }
+                "--emit" | "--cc" | "--cpu" | "-o" | "--output" => {
+                    i += 1;
+                    let Some(value) = args.get(i) else {
+                        eprintln!("error: {argument} requires a value");
+                        return 2;
+                    };
+                    match argument {
+                        "--emit" => match Emit::parse(value) {
+                            Some(emit) => options.emit = emit,
+                            None => {
+                                eprintln!("error: --emit must be exe, asm, obj, or c");
+                                return 2;
+                            }
+                        },
+                        "--cc" if !value.is_empty() => options.compiler = value.into(),
+                        "--cpu" if value == "native" => options.native_cpu = true,
+                        "--cpu" => {
+                            eprintln!(
+                                "error: --cpu currently accepts native; omit it for portable defaults"
+                            );
+                            return 2;
+                        }
+                        "--cc" => {
+                            eprintln!("error: --cc requires a compiler executable path");
+                            return 2;
+                        }
+                        _ => output = Some(value.clone()),
+                    }
+                    i += 1;
+                    continue;
+                }
+                "-O0" | "-O1" | "-O2" | "-O3" | "-Os" => {
+                    options.optimization = argument.into();
+                    i += 1;
+                    continue;
+                }
+                "--normal" | "--brainrot" | "--jole" => {
+                    if personality_selected {
+                        eprintln!("error: choose one diagnostic personality");
+                        return 2;
+                    }
+                    mode = argument.trim_start_matches("--");
+                    personality_selected = true;
+                    i += 1;
+                    continue;
+                }
+                option if option.starts_with('-') => {
+                    eprintln!("error: unknown compile option {option}");
+                    return 2;
+                }
+                _ => {}
+            }
+        }
+        if input.replace(argument).is_some() {
+            eprintln!("error: compile requires exactly one input file");
+            return 2;
+        }
+        i += 1;
+    }
+    let Some(input) = input else {
+        eprintln!("error: compile requires an input file");
+        return 2;
+    };
+    let program = match load(input) {
+        Ok(program) => program,
+        Err(error) => {
+            let (error, sources) = *error;
+            eprint!("{}", error.render(&sources, mode));
+            return 1;
+        }
+    };
+    let checked = match Checker::check(&program, true) {
+        Ok(checked) => checked,
+        Err(error) => {
+            eprint!("{}", error.render(&program.sources, mode));
+            return 1;
+        }
+    };
+    let target = output
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| Path::new(input).with_extension(options.emit.extension()));
+    match cussy::compile::compile(&program, &checked, Path::new(input), &target, &options) {
+        Ok(()) => {
+            println!("NATIVE BUILD VERIFIED: {}", target.display());
+            0
+        }
+        Err(error) => {
+            eprint!("{}", error.render(&program.sources, mode));
             1
         }
     }
