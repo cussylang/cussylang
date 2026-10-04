@@ -35,11 +35,25 @@ jobs:
           cd mobile/android
           ./gradlew --no-daemon assembleDebug assembleDebugAndroidTest testDebugUnitTest lintDebug
       - name: Boot Android emulator
+        env:
+          ANDROID_USER_HOME: ${{ runner.temp }}/cussy-android
+          ANDROID_AVD_HOME: ${{ runner.temp }}/cussy-avd
         run: |
           sudo chmod 666 /dev/kvm
-          echo no | avdmanager create avd --name cussy --package 'system-images;android-35;google_apis;x86_64' --force
+          mkdir -p "$ANDROID_USER_HOME" "$ANDROID_AVD_HOME"
+          echo no | avdmanager create avd --name cussy --package 'system-images;android-35;google_apis;x86_64' --path "$ANDROID_AVD_HOME/cussy.avd" --force
+          "$ANDROID_HOME/emulator/emulator" -list-avds | rg --line-regexp cussy
           nohup "$ANDROID_HOME/emulator/emulator" -avd cussy -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -no-metrics > "$RUNNER_TEMP/cussy-emulator.log" 2>&1 &
-          timeout 300 adb wait-for-device
+          cussy_emulator_pid=$!
+          sleep 2
+          if ! kill -0 "$cussy_emulator_pid"; then
+            cat "$RUNNER_TEMP/cussy-emulator.log"
+            exit 1
+          fi
+          if ! timeout 300 adb wait-for-device; then
+            cat "$RUNNER_TEMP/cussy-emulator.log"
+            exit 1
+          fi
           for attempt in $(seq 1 90); do
             if [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then
               adb shell input keyevent 82
